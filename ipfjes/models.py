@@ -75,3 +75,13 @@ class Dyspnoea(models.EpisodeSubrecord):
 
 class DiagnosisHistory(models.EpisodeSubrecord):
     initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")
+
+
+class SocCode(models.models.Model):
+    soc90 = fields.CharField(max_length=200)
+    soc2000  = fields.CharField(max_length=200)
+    title = fields.CharField(max_length=255)
+    short_desc = fields.TextField()
+    entry = fields.TextField()
+    tasks = fields.TextField()
+    related = fields.TextField()
