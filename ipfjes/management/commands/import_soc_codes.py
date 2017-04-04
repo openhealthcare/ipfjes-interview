@@ -7,7 +7,7 @@ from ipfjes import models
 class Command(BaseCommand):
 
     def clean(self):
-#        models.SocCode.objects.all().delete()
+        models.SocCode.objects.all().delete()
         models.SocJob.objects.all().delete()
 
     def load(self):
@@ -38,7 +38,7 @@ class Command(BaseCommand):
     def handle(self, *a, **k):
         print "Deleting all Soc Codes"
         self.clean()
-        # print "Loading Soc Code data"
-        # self.load()
+        print "Loading Soc Code data"
+        self.load()
         print "Creating Soc Code Job lookup list"
         self.as_lookup_list()
