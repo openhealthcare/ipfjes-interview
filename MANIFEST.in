@@ -1,0 +1,3 @@
+recursive-include ipfjes/static *
+recursive-include ipfjes/assets *
+recursive-include ipfjes/templates *
