@@ -10,8 +10,17 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Interview"
     slug = "interview"
     steps = (
-            steps.Step(display_name = "Introduction", template="interview_introduction.html"),
-            models.OccupationalHistory, models.ResidentialHistory, models.CohabitationHistory, models.BirthPlace, models.SmokingHistory, models.Dyspnoea, models.Treatment, models.PastMedicalHistory, models.DiagnosisHistory
-            )
-
-
+        steps.Step(display_name = "Introduction", template="interview_introduction.html"),
+        steps.Step(
+            model=models.OccupationalHistory,
+            step_controller="OccupationalHistoryCtrl"
+        ),
+        models.ResidentialHistory,
+        models.CohabitationHistory,
+        models.BirthPlace,
+        models.SmokingHistory,
+        models.Dyspnoea,
+        models.Treatment,
+        models.PastMedicalHistory,
+        models.DiagnosisHistory
+    )

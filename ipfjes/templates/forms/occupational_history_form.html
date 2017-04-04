@@ -1,5 +1,10 @@
 {% load forms %}
-{% input  field="OccupationalHistory.job_name"  %}
+{% input field="OccupationalHistory.soc_job"%}
+<div class="row">
+  <div class="col-md-9 col-md-offset-2">
+    <ng-include src="get_soc_details(editing.occupational_history)"></ng-include>
+  </div>
+</div>
 {% textarea  field="OccupationalHistory.job_tasks"  %}
 {% input  field="OccupationalHistory.employer_output"  %}
 {% input  field="OccupationalHistory.start_year"  %}

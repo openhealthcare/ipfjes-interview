@@ -10,7 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^soc/(?P<code>[0-9]+)/', views.SocCodeDetailView.as_view()),
+    url(r'^soc/details/', views.SocCodeDetailView.as_view()),
 )
 
 urlpatterns += opatterns
