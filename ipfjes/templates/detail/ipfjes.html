@@ -1,3 +1,5 @@
+{% load panels %}
+
 <div class="row"> 
     <div class="col-md-6 col-md-offset-4">
         <p class="text-center">
@@ -8,4 +10,17 @@
     </div>
 </div>
 
+<div class="row"> 
+    <div class="col-md-6 col-md-offset-4">
+        {% record_panel models.OccupationalHistory %}
+        {% record_panel models.ResidentialHistory %}
+        {% record_panel models.CohabitationHistory %}
+        {% record_panel models.BirthPlace %}
+        {% record_panel models.SmokingHistory %}
+        {% record_panel models.Dyspnoea %}
+        {% record_panel models.Treatment %}
+        {% record_panel models.PastMedicalHistory %}
+        {% record_panel models.DiagnosisHistory %}
+    </div>
+</div>
 
