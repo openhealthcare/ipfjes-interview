@@ -13,6 +13,7 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         steps.Step(display_name = "Introduction", template="interview_introduction.html"),
         steps.Step(
             model=models.OccupationalHistory,
+            template="interview_occupational_history.html",
             step_controller="OccupationalHistoryCtrl"
         ),
         models.ResidentialHistory,
