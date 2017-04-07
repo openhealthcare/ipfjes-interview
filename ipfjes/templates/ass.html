@@ -1,0 +1,34 @@
+{% load forms %}
+<div class="row">
+  <div class="col-md-9">
+    {% input label="Task Description" model="editing.task_description" %}
+
+    {% select label="Type of asbestos" model="editing.type" lookuplist="['Amosite', 'Crocidolite', 'Chrysotile']" %}
+    {% select label="% asbestos" model="editing.per_asbestos" lookuplist="['100%', '20-40%', '10-15%', '1%']" %}
+    <div class="row">
+      <div class="col-md-3 text-right">
+        <b> Intrinsic Emission:</b>
+      </div>
+      <div class="col-md-9">
+        <h5>
+          [[intrinsic_emission]]
+        </h5>
+      </div>
+    </div>
+    {% input label="Intrinsic emission (manual)" model="editing.intrinsic_emission" %}
+    {% input label="Handling" model="editing.handling" %}
+    {% input label="Local Controls" model="editing.local_controls" %}
+
+    {% input label="Passive Emission" model="editing.passive" %}
+
+    {% input label="Time source active" model="editing.time_active"%}
+    {% input label="General Ventilation" model="editing.general_ventilation" %}
+    {% input label="PPE" model="editing.ppe" %}
+    {% input label="% Time on task" model="editing.time_on_task" %}
+  </div>
+  <div class="col-md-3">
+    <p>Active Emission: <span ng-show="active_emission">[[ active_emission ]]</span></p>
+    <p>Total Emission: <span ng-show="total_emission">[[ total_emission ]]</span></p>
+    <p>Fractional Exposure: <span ng-show="fractional_exposure">[[ fractional_exposure ]]</span></p>
+  </div>
+</div>
