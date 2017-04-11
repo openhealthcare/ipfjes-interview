@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/drcjar/ipfjes-interview.png?label=ready&title=Ready)](https://waffle.io/drcjar/ipfjes-interview)
 This is IPFJES interview - the 
 
 To get started
