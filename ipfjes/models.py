@@ -96,6 +96,6 @@ class Site(lookuplists.LookupList): pass
 
 class StudyParticipantDetails(models.EpisodeSubrecord):
     PARTICIPANT_TYPE = (("case", "case"), ("control", "control"))
-    site = model.ForeignKeyOrFreeText(Site)
-    participant_type = fields.CharField(max_length=12, choices=PARTICIPANT_TYPE, blank=null)
+    site = models.ForeignKeyOrFreeText(Site)
+    participant_type = fields.CharField(max_length=12, choices=PARTICIPANT_TYPE, null=True, blank=True)
 
