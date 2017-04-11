@@ -10,7 +10,9 @@ from opal.core import lookuplists
 Core Opal models - these inherit from the abstract data models in
 opal.models but can be customised here with extra / altered fields.
 """
-class Demographics(models.Demographics): pass
+class Demographics(models.Demographics):
+    contact_details = fields.TextField(blank=True, null=True)
+
 class Location(models.Location): pass
 class Allergies(models.Allergies): pass
 class Diagnosis(models.Diagnosis): pass
@@ -89,3 +91,11 @@ class SocCode(models.models.Model):
     entry = fields.TextField()
     tasks = fields.TextField()
     related = fields.TextField()
+
+class Site(lookuplists.LookupList): pass
+
+class StudyParticipantDetails(models.EpisodeSubrecord):
+    PARTICIPANT_TYPE = (("case", "case"), ("control", "control"))
+    site = models.ForeignKeyOrFreeText(Site)
+    participant_type = fields.CharField(max_length=12, choices=PARTICIPANT_TYPE, null=True, blank=True)
+

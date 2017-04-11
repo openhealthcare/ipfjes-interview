@@ -4,7 +4,12 @@ from ipfjes import models
 class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Add new participant"
     slug = "new"
-    steps = (models.Demographics, )
+    steps = (
+            steps.Step(model=models.StudyParticipantDetails,
+                       template="add_participant_details.html"),
+            models.Demographics
+            )
+
 
 class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Interview"
