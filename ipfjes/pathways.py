@@ -11,6 +11,12 @@ class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             )
 
 
+    def save(self, data, user):
+        patient, episode = super(AddParticipant, self).save(data, user)
+        episode.set_tag_names(["needs_interview"], user)
+        return patient, episode
+
+
 class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Interview"
     slug = "interview"

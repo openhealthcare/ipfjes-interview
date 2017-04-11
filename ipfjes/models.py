@@ -92,6 +92,11 @@ class SocCode(models.models.Model):
     tasks = fields.TextField()
     related = fields.TextField()
 
+class GeneralNotes(models.EpisodeSubrecord):
+    _title = "General Notes"
+    _icon = "fa fa-info-circle"
+    note = fields.TextField(blank=True, null=True, verbose_name="General notes")
+
 class Site(lookuplists.LookupList): pass
 
 class StudyParticipantDetails(models.EpisodeSubrecord):
