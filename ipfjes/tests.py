@@ -18,13 +18,24 @@ class ExampleTestCase(TestCase):
         self.assertIsInstance("7777777", str)
 
 class ViewsTestCase(OpalTestCase):
+
+    def test_soccode_title_undefined(self):
+        view = views.SocCodeDetailView()
+        view.request = self.rf.get("/soc/?title=undefined")
+        response = view.dispatch()
+        self.assertEqual(404, response.status_code)
+
     def test_soccode_context(self):
-        request = self.rf.get("/soc/1111/")
+        request = self.rf.get("/soc/?title=Diplomat")
         self.assertEqual(0, models.SocCode.objects.count())
-        Diplomat = models.SocCode.objects.create(soc90 = "100", soc2000 = "1111", title="Diplomat", short_desc="Diplomat", entry = "jam", tasks = "jam", related = "jam")
+        Diplomat = models.SocCode.objects.create(
+            soc90 = "100", soc2000 = "1111", title="Diplomat",
+            short_desc="Diplomat", entry = "jam", tasks = "jam",
+            related = "jam")
         self.assertEqual(1, models.SocCode.objects.count())
         view = views.SocCodeDetailView()
         view.request = request
-        context = view.get_context_data(code = "1111")
+        context = view.get_context_data()
         self.assertEqual(context['soc'].title, "Diplomat")
+        self.assertEqual(context['soc'].soc2000, "1111")
         self.assertIsInstance(context['soc'], models.SocCode)
