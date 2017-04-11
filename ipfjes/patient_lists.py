@@ -17,3 +17,16 @@ class AllPatientsList(core.patient_lists.PatientList):
 
     def get_queryset(self, **kwargs):
         return Episode.objects.all()
+
+class ParticipantsToCallList(core.patient_lists.PatientList):
+    display_name = 'Participants to call'
+    slug = "interviews"
+
+    schema = [
+        models.Demographics,
+        models.GeneralNotes,
+        core.patient_lists.Column(name = "actions", title = "Actions", template_path = "interview_actions.html")
+        ]
+    def get_queryset(self, **kwargs):
+        return Episode.objects.filter(tagging__value="needs_interview")
+
