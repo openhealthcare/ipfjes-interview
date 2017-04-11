@@ -4,12 +4,15 @@ ipfjes models.
 from django.db.models import fields
 
 from opal import models
+from opal.core import lookuplists
 
 """
 Core Opal models - these inherit from the abstract data models in
 opal.models but can be customised here with extra / altered fields.
 """
-class Demographics(models.Demographics): pass
+class Demographics(models.Demographics):
+    contact_details = fields.TextField(blank=True, null=True)
+
 class Location(models.Location): pass
 class Allergies(models.Allergies): pass
 class Diagnosis(models.Diagnosis): pass
@@ -29,9 +32,12 @@ class PatientConsultation(models.PatientConsultation): pass
 """
 End Opal core models
 """
+class SocJob(lookuplists.LookupList): pass
+
 class OccupationalHistory(models.PatientSubrecord):
     _title = "Occupational History"
     job_name = fields.CharField(max_length=250, blank=True, null=True)
+    soc_job = models.ForeignKeyOrFreeText(SocJob, verbose_name="Job name")
     job_tasks = fields.TextField(blank=True, null=True)
     employer_output = fields.CharField(max_length=250, blank=True, null=True) # change label to be what did you make
     start_year = fields.CharField(max_length=4, blank=True, null=True)
@@ -91,4 +97,10 @@ class GeneralNotes(models.EpisodeSubrecord):
     _icon = "fa fa-info-circle"
     note = fields.TextField(blank=True, null=True, verbose_name="General notes")
 
+class Site(lookuplists.LookupList): pass
+
+class StudyParticipantDetails(models.EpisodeSubrecord):
+    PARTICIPANT_TYPE = (("case", "case"), ("control", "control"))
+    site = models.ForeignKeyOrFreeText(Site)
+    participant_type = fields.CharField(max_length=12, choices=PARTICIPANT_TYPE, null=True, blank=True)
 
