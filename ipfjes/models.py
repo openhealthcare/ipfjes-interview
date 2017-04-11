@@ -4,6 +4,7 @@ ipfjes models.
 from django.db.models import fields
 
 from opal import models
+from opal.core import lookuplists
 
 """
 Core Opal models - these inherit from the abstract data models in
@@ -31,9 +32,12 @@ class PatientConsultation(models.PatientConsultation): pass
 """
 End Opal core models
 """
+class SocJob(lookuplists.LookupList): pass
+
 class OccupationalHistory(models.PatientSubrecord):
     _title = "Occupational History"
     job_name = fields.CharField(max_length=250, blank=True, null=True)
+    soc_job = models.ForeignKeyOrFreeText(SocJob, verbose_name="Job name")
     job_tasks = fields.TextField(blank=True, null=True)
     employer_output = fields.CharField(max_length=250, blank=True, null=True) # change label to be what did you make
     start_year = fields.CharField(max_length=4, blank=True, null=True)
