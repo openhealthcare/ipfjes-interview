@@ -266,6 +266,15 @@ REST_FRAMEWORK = {
 #     ('text/x-scss', 'sass --scss {infile} {outfile}'),
 # )
 
+if "test" in sys.argv:
+    PASSWORD_HASHERS = (
+                   'django.contrib.auth.hashers.MD5PasswordHasher',
+                      )
+    MIGRATION_MODULES = {
+                   'opal': 'opal.nomigrations',
+                   'ipfjes': 'ipfjes.nomigrations'
+                        }
+
 try:
     from local_settings import *
 except:
