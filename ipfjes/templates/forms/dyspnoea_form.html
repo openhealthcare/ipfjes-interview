@@ -1,6 +1,24 @@
 {% load forms %}
-{% checkbox  field="Dyspnoea.breathless"  %}
-{% checkbox  field="Dyspnoea.short_of_breath"  %}
-{% checkbox  field="Dyspnoea.slower_than_most"  %}
-{% checkbox  field="Dyspnoea.stops_for_breath"  %}
-{% checkbox  field="Dyspnoea.dressing_undressing"  %}
+{% load ipfjes %}
+
+{% script_text "I would like to ask you some questions about being short of breath." %}
+
+{% script_text "Are you:" %}
+
+{% script_text "Not troubled by breathless except on strenuous exercise?" %}
+{% radio  field="Dyspnoea.breathless"  %}
+
+{% script_text "Short of breath when hurrying on a level or when walking up a slight hill?" %}
+{% radio  field="Dyspnoea.short_of_breath"  %}
+
+{% script_text "Are you someone who:" %}
+
+{% script_text "Walks slower than most people on the level, stops after a mile or so, or stops after 15 minutes walking at own pace?" %}
+{% radio   field="Dyspnoea.slower_than_most"  %}
+
+{% script_text "Stops for breath after walking about 100 yds or after a few minutes on level ground?" %}
+{% radio field="Dyspnoea.stops_for_breath"  %}
+
+{% script_text "Are you:" %}
+{% script_text "Too breathless to leave the house, or breathless when dressing/undressing?" %}
+{% radio   field="Dyspnoea.dressing_undressing"  %}

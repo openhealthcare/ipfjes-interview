@@ -1,6 +1,25 @@
 {% load forms %}
-{% input  field="AsbestosExposureHistory.percent_task"  %}
-{% input  field="AsbestosExposureHistory.handling"  %}
-{% input  field="AsbestosExposureHistory.mask"  %}
+{% load ipfjes %}
+
+{% script_text "Tell me about your contact with asbestos" %}
+{% input  field="AsbestosExposureHistory.description"  %}
+
+{% script_text "What was the asbestos containing material?" %}
 {% input  field="AsbestosExposureHistory.asbestos_material"  %}
+
+{% script_text "What was done with it?" %}
+{% input  field="AsbestosExposureHistory.handling"  %}
+
+
+{% script_text "Was this done within your arms reach?" %}
+{% input  field="AsbestosExposureHistory.near_or_far_field"  %}
+
+{% script_text "Where was the task completed?" %}
 {% input  field="AsbestosExposureHistory.task_location"  %}
+
+{% script_text "How long did the task take and how often did you do it?" %}
+{% input  field="AsbestosExposureHistory.percent_task"  %}
+
+{% script_text "Did you wear a mask?" %}
+{% input  field="AsbestosExposureHistory.mask"  %}
+

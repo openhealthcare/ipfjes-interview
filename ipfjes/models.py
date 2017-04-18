@@ -126,8 +126,8 @@ class Dyspnoea(models.EpisodeSubrecord):
 class BloodRelationHistory(models.EpisodeSubrecord):
     relation = models.ForeignKeyOrFreeText(Relationship)
     diagnosis = models.ForeignKeyOrFreeText(models.Condition)
-    age_at_diagnosis = fields.IntegerField(blank=True, null=True) 
-    age_at_death = fields.IntegerField(blank=True, null=True) 
+    age_at_diagnosis = fields.IntegerField(blank=True, null=True)
+    age_at_death = fields.IntegerField(blank=True, null=True)
 
 class EverEncounteredAsbestos(models.EpisodeSubrecord):
     contact_with = fields.CharField(
@@ -136,12 +136,18 @@ class EverEncounteredAsbestos(models.EpisodeSubrecord):
     )
 
 class AsbestosExposureHistory(models.EpisodeSubrecord):
+    NEAR_FAR_CHOICES = (('Near', 'Near'), ('Far', 'Far'))
+    description = fields.TextField()
     asbestos_material = models.ForeignKeyOrFreeText(AsbestosMaterial)
+    near_or_far_field = fields.CharField(
+        max_length=4, blank=True, null=True,
+        choices=NEAR_FAR_CHOICES
+    )
     handling =  models.ForeignKeyOrFreeText(AsbestosHandling)
     percent_task = fields.FloatField(blank=True, null=True)
     task_location =  models.ForeignKeyOrFreeText(TaskLocation)
     mask =  models.ForeignKeyOrFreeText(Mask)
-	
+
 class DiagnosisHistory(models.EpisodeSubrecord):
   #  initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")
     cough = fields.CharField(
@@ -156,7 +162,7 @@ class DiagnosisHistory(models.EpisodeSubrecord):
         max_length=3, blank=True, null=True,
         choices=YES_NO_CHOICES
     )
-     
+
     incidental_desc = fields.TextField()
     other = fields.TextField()
 
@@ -187,4 +193,4 @@ class StudyParticipantDetails(models.EpisodeSubrecord):
     postal_address = fields.TextField()
     comments = fields.TextField()
 
-    
+

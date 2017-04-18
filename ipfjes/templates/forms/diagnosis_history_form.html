@@ -1,4 +1,8 @@
 {% load forms %}
+{% load ipfjes %}
+
+{% script_text "What took you to the doctor at the beginning of the illness?" %}
+
 {% radio  field="DiagnosisHistory.cough"  %}
 {% radio  field="DiagnosisHistory.breathlessness"  %}
 {% radio  field="DiagnosisHistory.incidental"  %}

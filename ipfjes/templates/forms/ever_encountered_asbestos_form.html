@@ -1,2 +1,5 @@
 {% load forms %}
-{% input  field="EverEncounteredAsbestos.contact_with"  %}
+{% load ipfjes %}
+
+{% script_text "Did you, or anyone close to you, ever work with or disturb material you suspected to be made from asbestos? This might include materials such as asbestos lagging, asbestos sprayed coatings, AIB(asbestos insulation board - e.g asbesolux, marinite, shipboard, LDR, turnasbestos etc) or corrugated roofing?" %}
+{% radio  field="EverEncounteredAsbestos.contact_with"  %}

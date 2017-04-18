@@ -1,5 +1,9 @@
 {% load forms %}
+{% load ipfjes %}
+
+{% script_text "Do you have any brothers or sisters? Are they well? How about your parents? How about your children?" %}
+
+{% input  field="BloodRelationHistory.relation"  %}
 {% input  field="BloodRelationHistory.age_at_diagnosis"  %}
 {% input  field="BloodRelationHistory.age_at_death"  %}
-{% input  field="BloodRelationHistory.relation"  %}
 {% input  field="BloodRelationHistory.diagnosis"  %}
