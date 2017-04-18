@@ -12,6 +12,7 @@ opal.models but can be customised here with extra / altered fields.
 """
 class Demographics(models.Demographics):
     contact_details = fields.TextField(blank=True, null=True)
+    phone_number = fields.CharField(max_length=250, blank=True, null=True)
 
 class Location(models.Location): pass
 class Allergies(models.Allergies): pass
