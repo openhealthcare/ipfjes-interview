@@ -6,6 +6,8 @@ from django.db.models import fields
 from opal import models
 from opal.core import lookuplists
 
+YES_NO_CHOICES = (('Yes', 'Yes'), ('No', 'No'))
+
 """
 Core Opal models - these inherit from the abstract data models in
 opal.models but can be customised here with extra / altered fields.
@@ -34,21 +36,33 @@ class PatientConsultation(models.PatientConsultation): pass
 End Opal core models
 """
 class SocJob(lookuplists.LookupList): pass
+class WorkingAreaType(lookuplists.LookupList): pass
+class Smokables(lookuplists.LookupList): pass
 
 class OccupationalHistory(models.PatientSubrecord):
     _title = "Occupational History"
+    
     job_name = fields.CharField(max_length=250, blank=True, null=True)
     soc_job = models.ForeignKeyOrFreeText(SocJob, verbose_name="Job name")
     job_tasks = fields.TextField(blank=True, null=True)
+    company_name = fields.TextField(blank=True, null=True)
     employer_output = fields.CharField(max_length=250, blank=True, null=True) # change label to be what did you make
+    working_area = models.ForeignKeyOrFreeText(WorkingAreaType)
+    full_time = fields.BooleanField(default=True)
+    av_hours_per_week_if_not_full_time = fields.FloatField(blank=True, null=True)
+    year_round = fields.BooleanField(default=True)
+    av_months_per_year_if_not_year_round = fields.FloatField(blank=True, null=True)
     start_year = fields.CharField(max_length=4, blank=True, null=True)
     end_year = fields.CharField(max_length=4, blank=True, null=True)
     address = fields.TextField(blank=True, null=True)
+    
 
 class ResidentialHistory(models.PatientSubrecord):
     _title = "Residential History"
     address = fields.TextField(blank=True, null=True)
-    howlong = fields.TextField(blank=True, null=True)
+    start_year = fields.CharField(max_length=4, blank=True, null=True)
+    end_year = fields.CharField(max_length=4, blank=True, null=True)
+    
 
 class CohabitationHistory(models.PatientSubrecord):
     _title = "Cohabitation History"
@@ -65,12 +79,20 @@ class BirthPlace(models.PatientSubrecord):
 
 class SmokingHistory(models.EpisodeSubrecord):
     _title = 'Smoking History'
-    ever_smoked = fields.NullBooleanField()
-    current_smoker = fields.NullBooleanField()
+
+    ever_smoked = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    current_smoker = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
     start_smoking_age = fields.CharField(max_length=20, blank=True, null=True)
     stop_smoking_age = fields.CharField(max_length=20, blank=True, null=True)
     cigarettes_per_day = fields.CharField(max_length=20, blank=True, null=True)
-    what_do_you_smoke = fields.TextField(blank=True, null=True)
+    what_do_you_smoke = models.ForeignKeyOrFreeText(Smokables)
+    smoking_notes = fields.TextField(blank=True, null=True)
 
 class Dyspnoea(models.EpisodeSubrecord):
     _title = 'mMRC Dispnoea'

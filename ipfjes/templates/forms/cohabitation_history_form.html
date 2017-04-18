@@ -1,5 +1,11 @@
 {% load forms %}
+{% load ipfjes %}
+
+{% script_text "What was the name of the person?" %}
 {% input  field="CohabitationHistory.nameofperson"  %}
-{% input  field="CohabitationHistory.relationship"  %}
+
+{% script_text "How long for?" %}
 {% textarea  field="CohabitationHistory.howlong"  %}
+
+{% script_text "Do you remember what their job was?" %}
 {% textarea  field="CohabitationHistory.occupation"  %}

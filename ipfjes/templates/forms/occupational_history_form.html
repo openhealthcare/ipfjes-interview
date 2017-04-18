@@ -1,12 +1,42 @@
 {% load forms %}
+{% load ipfjes %}
+
+{% script_text "What was the name of your job?" %}
 {% input field="OccupationalHistory.soc_job"%}
 <div class="row">
   <div class="col-md-9 col-md-offset-2">
     <ng-include src="get_soc_details(editing.occupational_history)"></ng-include>
   </div>
 </div>
+
+{% script_text "What did you do in this job?" %}
 {% textarea  field="OccupationalHistory.job_tasks"  %}
+
+{% script_text "What was the name of the company (if applicable)?" %}
+{% input field="OccupationalHistory.company_name" %}
+
+{% script_text "What did the company make (if applicable)?" %}
 {% input  field="OccupationalHistory.employer_output"  %}
-{% input  field="OccupationalHistory.start_year"  %}
-{% input  field="OccupationalHistory.end_year"  %}
+
+{% script_text "What sort of working area did you spend most of your time?" %}
+{% input field="OccupationalHistory.working_area" %}
+
+{% script_text "Where was the place you worked?" %}
 {% textarea  field="OccupationalHistory.address"  %}
+
+{% script_text "Did you work full time? (if not specify average hours per week)" %}
+{% checkbox field="OccupationalHistory.full_time" %}
+{% input field="OccupationalHistory.av_hours_per_week_if_not_full_time" %}
+
+{% script_text "Did you work all year round (if not specify months of the year)" %}
+{% checkbox field="OccupationalHistory.year_round" %}
+{% input field="OccupationalHistory.av_months_per_year_if_not_year_round" %}
+
+{% script_text "Do you remember how old you were or what year you started the job?" %}
+{% input  field="OccupationalHistory.start_year"  %}
+
+{% script_text "Do you remember how old you were or what year you finished the job?" %}
+{% input  field="OccupationalHistory.end_year"  %}
+
+{% script_text "Do you remember what job you had next?" %}
+

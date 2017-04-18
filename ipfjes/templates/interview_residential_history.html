@@ -1,0 +1,13 @@
+{% load pathways %}
+{% load ipfjes %}
+{% script_text "I’m going to ask you about places that you’ve lived now. I know it might be difficult to remember, don’t worry." %}
+
+{% include models.BirthPlace.get_form_template %}
+
+{% script_text "Do you remember the places you lived when you were growing up? (until you finished school)" %}
+
+{% multisave models.ResidentialHistory %}
+
+{% script_text "When you were growing up who lived at home with you?" %}
+
+{% multisave models.CohabitationHistory %}

@@ -1,3 +1,8 @@
 {% load forms %}
+{% load ipfjes %}
+
+{% script_text "What country were you born in?" %}
 {% input  field="BirthPlace.countryofbirth"  %}
+
+{% script_text "What place were you born in?" %}
 {% textarea  field="BirthPlace.place"  %}
