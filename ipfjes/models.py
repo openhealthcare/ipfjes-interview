@@ -38,10 +38,16 @@ End Opal core models
 class SocJob(lookuplists.LookupList): pass
 class WorkingAreaType(lookuplists.LookupList): pass
 class Smokables(lookuplists.LookupList): pass
+class Relationship(lookuplists.LookupList):pass
+class AsbestosMaterial(lookuplists.LookupList): pass
+class AsbestosHandling(lookuplists.LookupList): pass
+class TaskLocation(lookuplists.LookupList): pass
+class Mask(lookuplists.LookupList): pass
+class Site(lookuplists.LookupList): pass
 
 class OccupationalHistory(models.PatientSubrecord):
     _title = "Occupational History"
-    
+
     job_name = fields.CharField(max_length=250, blank=True, null=True)
     soc_job = models.ForeignKeyOrFreeText(SocJob, verbose_name="Job name")
     job_tasks = fields.TextField(blank=True, null=True)
@@ -55,14 +61,14 @@ class OccupationalHistory(models.PatientSubrecord):
     start_year = fields.CharField(max_length=4, blank=True, null=True)
     end_year = fields.CharField(max_length=4, blank=True, null=True)
     address = fields.TextField(blank=True, null=True)
-    
+
 
 class ResidentialHistory(models.PatientSubrecord):
     _title = "Residential History"
     address = fields.TextField(blank=True, null=True)
     start_year = fields.CharField(max_length=4, blank=True, null=True)
     end_year = fields.CharField(max_length=4, blank=True, null=True)
-    
+
 
 class CohabitationHistory(models.PatientSubrecord):
     _title = "Cohabitation History"
@@ -96,14 +102,63 @@ class SmokingHistory(models.EpisodeSubrecord):
 
 class Dyspnoea(models.EpisodeSubrecord):
     _title = 'mMRC Dispnoea'
-    breathless = fields.NullBooleanField()
-    short_of_breath = fields.NullBooleanField()
-    slower_than_most = fields.NullBooleanField()
-    stops_for_breath = fields.NullBooleanField()
-    dressing_undressing = fields.NullBooleanField()
+    breathless = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    short_of_breath = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    slower_than_most = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    stops_for_breath = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    dressing_undressing = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
 
+class BloodRelationHistory(models.EpisodeSubrecord):
+    relation = models.ForeignKeyOrFreeText(Relationship)
+    diagnosis = models.ForeignKeyOrFreeText(models.Condition)
+    age_at_diagnosis = fields.IntegerField(blank=True, null=True) 
+    age_at_death = fields.IntegerField(blank=True, null=True) 
+
+class EverEncounteredAsbestos(models.EpisodeSubrecord):
+    contact_with = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+
+class AsbestosExposureHistory(models.EpisodeSubrecord):
+    asbestos_material = models.ForeignKeyOrFreeText(AsbestosMaterial)
+    handling =  models.ForeignKeyOrFreeText(AsbestosHandling)
+    percent_task = fields.FloatField(blank=True, null=True)
+    task_location =  models.ForeignKeyOrFreeText(TaskLocation)
+    mask =  models.ForeignKeyOrFreeText(Mask)
+	
 class DiagnosisHistory(models.EpisodeSubrecord):
-    initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")
+  #  initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")
+    cough = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    breathlessness = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    incidental = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+     
+    incidental_desc = fields.TextField()
+    other = fields.TextField()
 
 
 class SocCode(models.models.Model):
@@ -120,10 +175,16 @@ class GeneralNotes(models.EpisodeSubrecord):
     _icon = "fa fa-info-circle"
     note = fields.TextField(blank=True, null=True, verbose_name="General notes")
 
-class Site(lookuplists.LookupList): pass
-
 class StudyParticipantDetails(models.EpisodeSubrecord):
     PARTICIPANT_TYPE = (("case", "case"), ("control", "control"))
     site = models.ForeignKeyOrFreeText(Site)
     participant_type = fields.CharField(max_length=12, choices=PARTICIPANT_TYPE, null=True, blank=True)
+    want_updates =  fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    email_address = fields.CharField(max_length=200, blank=True, null=True)
+    postal_address = fields.TextField()
+    comments = fields.TextField()
 
+    

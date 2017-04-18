@@ -1,2 +1,6 @@
 {% load forms %}
-{% textarea  field="DiagnosisHistory.initial_consult_reason"  %}
+{% radio  field="DiagnosisHistory.cough"  %}
+{% radio  field="DiagnosisHistory.breathlessness"  %}
+{% radio  field="DiagnosisHistory.incidental"  %}
+{% textarea  field="DiagnosisHistory.incidental_desc"  %}
+{% textarea  field="DiagnosisHistory.other"  %}
