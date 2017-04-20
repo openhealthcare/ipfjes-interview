@@ -1,25 +1,64 @@
 {% load forms %}
 {% load ipfjes %}
+<div class="row">
+  <div class="col-md-5">
+    {% script_text "Tell me about your contact with asbestos" %}
+  </div>
+  <div class="col-md-7">
+    {% input  field="AsbestosExposureHistory.description"  %}
+  </div>
+</div>
 
-{% script_text "Tell me about your contact with asbestos" %}
-{% input  field="AsbestosExposureHistory.description"  %}
+<div class="row">
+  <div class="col-md-5">
+    {% script_text "What was the asbestos containing material?" %}
+  </div>
+  <div class="col-md-7">
+    {% input  field="AsbestosExposureHistory.asbestos_material"  %}
+  </div>
+</div>
 
-{% script_text "What was the asbestos containing material?" %}
-{% input  field="AsbestosExposureHistory.asbestos_material"  %}
+<div class="row">
+  <div class="col-md-5">
+    {% script_text "What was done with it?" %}
+  </div>
+  <div class="col-md-7">
+    {% input  field="AsbestosExposureHistory.handling"  %}
+  </div>
+</div>
 
-{% script_text "What was done with it?" %}
-{% input  field="AsbestosExposureHistory.handling"  %}
+<div class="row">
+  <div class="col-md-5">
+    {% script_text "Was this done within your arms reach?" %}
+  </div>
+  <div class="col-md-7">
+    {% input  field="AsbestosExposureHistory.near_or_far_field"  %}
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-md-5">
+    {% script_text "Where was the task completed?" %}
+  </div>
+  <div class="col-md-7">
+    {% input  field="AsbestosExposureHistory.task_location"  %}
+  </div>
+</div>
 
-{% script_text "Was this done within your arms reach?" %}
-{% input  field="AsbestosExposureHistory.near_or_far_field"  %}
+<div class="row">
+  <div class="col-md-5">
+    {% script_text "How long did the task take and how often did you do it?" %}
+  </div>
+  <div class="col-md-7">
+    {% input  field="AsbestosExposureHistory.percent_task"  %}
+  </div>
+</div>
 
-{% script_text "Where was the task completed?" %}
-{% input  field="AsbestosExposureHistory.task_location"  %}
-
-{% script_text "How long did the task take and how often did you do it?" %}
-{% input  field="AsbestosExposureHistory.percent_task"  %}
-
-{% script_text "Did you wear a mask?" %}
-{% input  field="AsbestosExposureHistory.mask"  %}
-
+<div class="row">
+  <div class="col-md-5">
+    {% script_text "Did you wear a mask?" %}
+  </div>
+  <div class="col-md-7">
+    {% input  field="AsbestosExposureHistory.mask"  %}
+  </div>
+</div>

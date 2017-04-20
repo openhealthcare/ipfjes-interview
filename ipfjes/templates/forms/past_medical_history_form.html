@@ -1,7 +1,18 @@
 {% load forms %}
 {% load ipfjes %}
-
-{% script_text "Do you have any other serious illnesses?" %}
-{% input  field="PastMedicalHistory.condition"  %}
-{% input  field="PastMedicalHistory.year"  %}
-{% input  field="PastMedicalHistory.details"  %}
+<div class="row">
+  <div class="col-md-12">
+    {% script_text "Do you have any other serious illnesses?" %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-9">
+    {% input  field="PastMedicalHistory.condition"  %}
+  </div>
+  <div class="col-md-3">
+    {% input  field="PastMedicalHistory.year"  %}
+  </div>
+  <div class="col-md-12">
+    {% input  field="PastMedicalHistory.details"  %}
+  </div>
+</div>

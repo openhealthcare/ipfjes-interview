@@ -1,11 +1,29 @@
 {% load forms %}
 {% load ipfjes %}
+<div class="row">
+  <div class="col-md-4">
 
-{% script_text "What was the name of the person?" %}
-{% input  field="CohabitationHistory.nameofperson"  %}
+    {% script_text "What was the name of the person?" %}
+  </div>
+  <div class="col-md-8">
+    {% input  field="CohabitationHistory.nameofperson"  %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
 
-{% script_text "How long for?" %}
-{% textarea  field="CohabitationHistory.howlong"  %}
+    {% script_text "How long for?" %}
+  </div>
+  <div class="col-md-8">
+    {% textarea  field="CohabitationHistory.howlong"  %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "Do you remember what their job was?" %}
+  </div>
+  <div class="col-md-8">
 
-{% script_text "Do you remember what their job was?" %}
-{% textarea  field="CohabitationHistory.occupation"  %}
+    {% textarea  field="CohabitationHistory.occupation"  %}
+  </div>
+</div>

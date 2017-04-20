@@ -1,0 +1,10 @@
+body {
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.form-horizontal .form-group {
+  padding-left: 18px;
+  padding-right: 18px;
+}

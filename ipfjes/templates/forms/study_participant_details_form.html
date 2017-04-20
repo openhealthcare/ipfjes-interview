@@ -4,7 +4,8 @@
 {% script_text "Thank-you very much for participating today. Is there anything you’d like to ask us? Would you like to be kept updated on the study? How would you prefer to be updated? (Post or email, capture email if prefers email)" %}
 
 {% radio  field="StudyParticipantDetails.want_updates"  %}
-{% input  field="StudyParticipantDetails.email_address"  %}
-{% textarea  field="StudyParticipantDetails.postal_address"  %}
+<div ng-show=" editing.study_participant_details.want_updates == 'Yes' ">
+  {% input  field="StudyParticipantDetails.email_address"  %}
+  {% textarea  field="StudyParticipantDetails.postal_address"  %}
+</div>
 {% textarea  field="StudyParticipantDetails.comments"  %}
-

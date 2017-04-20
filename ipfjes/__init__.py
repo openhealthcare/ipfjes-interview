@@ -13,6 +13,9 @@ class Application(application.OpalApplication):
         # 'js/ipfjes/flow.js',
     ]
     default_episode_category = "ipfjes"
+    styles = [
+        'css/ipfjes.css'
+    ]
 
     @classmethod
     def get_menu_items(klass, user=None):

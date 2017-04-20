@@ -1,9 +1,21 @@
 {% load forms %}
 {% load ipfjes %}
-
-{% script_text "Do you have any brothers or sisters? Are they well? How about your parents? How about your children?" %}
-
-{% input  field="BloodRelationHistory.relation"  %}
-{% input  field="BloodRelationHistory.age_at_diagnosis"  %}
-{% input  field="BloodRelationHistory.age_at_death"  %}
-{% input  field="BloodRelationHistory.diagnosis"  %}
+<div class="row">
+  <div class="col-md-12">
+    {% script_text "Do you have any brothers or sisters? Are they well? How about your parents? How about your children?" %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    {% input  field="BloodRelationHistory.relation"  %}
+  </div>
+  <div class="col-md-6">
+    {% input  field="BloodRelationHistory.age_at_diagnosis"  %}
+  </div>
+  <div class="col-md-6">
+    {% input  field="BloodRelationHistory.age_at_death"  %}
+  </div>
+  <div class="col-md-12">
+    {% input  field="BloodRelationHistory.diagnosis"  %}
+  </div>
+</div>

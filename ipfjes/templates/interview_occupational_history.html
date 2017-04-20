@@ -1,7 +1,5 @@
 {% load pathways %}
-<p>I want you to think about all of the jobs you’ve had. I know this can be hard, we’ll try one
-at a time.</p>
-
-<p>
-Do you remember the first job that you had after school?</p>
+{% load ipfjes %}
+{% script_text "I want you to think about all of the jobs you’ve had. I know this can be hard, we’ll try one at a time." %}
+{% script_text "Do you remember the first job that you had after school?" %}
 {% multisave models.OccupationalHistory %}

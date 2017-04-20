@@ -3,11 +3,28 @@
 
 {% script_text "Do you take any regular medications?" %}
 {% input field="Treatment.drug" lookuplist="antimicrobial_list" %}
-{% input field="Treatment.dose" %}
-{% input field="Treatment.route" %}
-{% input field="Treatment.frequency" %}
-{% datepicker field="Treatment.start_date" %}
-{% datepicker field="Treatment.end_date" %}
-
-{% script_text "What do you take these for?" %}
-{% input field="Treatment.reason" %}
+<div class="row">
+  <div class="col-md-4">
+    {% input field="Treatment.dose" %}
+  </div>
+  <div class="col-md-4">
+    {% input field="Treatment.route" %}
+  </div>
+  <div class="col-md-4">
+    {% input field="Treatment.frequency" %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    {% datepicker field="Treatment.start_date" %}
+  </div>
+  <div class="col-md-6">
+    {% datepicker field="Treatment.end_date" %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    {% script_text "What do you take these for?" %}
+    {% input field="Treatment.reason" %}
+  </div>
+</div>
