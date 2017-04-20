@@ -1,0 +1,9 @@
+<div ng-class="{'has-error': form.date_of_birth.$invalid}" ng-hide="editing.demographics.external_system" class="form-group">
+  <label class="control-label">Date Of Birth</label>
+  <div class="">
+    <div date-of-birth ng-model="{{ model_name }}"></div>
+    <span class="help-block" ng-show="form.date_of_birth.$invalid">
+      Please enter a valid date of birth
+    </span>
+  </div>
+</div>

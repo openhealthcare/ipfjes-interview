@@ -7,7 +7,7 @@
   <div class="col-md-8">
     {% input field="OccupationalHistory.soc_job"%}
   </div>
-  <div class="col-md-12 col-md-offset-2">
+  <div class="col-md-8 col-md-offset-2 well" ng-show="editing.occupational_history.soc_job">
     <ng-include src="get_soc_details(editing.occupational_history)"></ng-include>
   </div>
 </div>
@@ -63,7 +63,9 @@
   </div>
   <div class="col-md-8">
     {% checkbox field="OccupationalHistory.full_time" %}
-    {% input field="OccupationalHistory.av_hours_per_week_if_not_full_time" %}
+    <div ng-show="!editing.occupational_history.full_time">
+      {% input field="OccupationalHistory.av_hours_per_week_if_not_full_time" %}
+    </div>
   </div>
 </div>
 <div class="row">
@@ -73,7 +75,9 @@
   </div>
   <div class="col-md-8">
     {% checkbox field="OccupationalHistory.year_round" %}
-    {% input field="OccupationalHistory.av_months_per_year_if_not_year_round" %}
+    <div ng-hide="editing.occupational_history.year_round">
+      {% input field="OccupationalHistory.av_months_per_year_if_not_year_round" %}
+    </div>
   </div>
 </div>
 <div class="row">

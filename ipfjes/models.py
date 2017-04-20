@@ -72,9 +72,15 @@ class ResidentialHistory(models.PatientSubrecord):
 
 class CohabitationHistory(models.PatientSubrecord):
     _title = "Cohabitation History"
-    nameofperson = fields.CharField(max_length=250, blank=True, null=True)
+    nameofperson = fields.CharField(
+        max_length=250, blank=True, null=True,
+        verbose_name="Name of person"
+    )
     relationship = fields.CharField(max_length=250, blank=True, null=True)
-    howlong = fields.TextField(blank=True, null=True)
+    howlong = fields.TextField(
+        blank=True, null=True,
+        verbose_name="How long"
+    )
     occupation = fields.TextField(blank=True, null=True)
 
 class BirthPlace(models.PatientSubrecord):
