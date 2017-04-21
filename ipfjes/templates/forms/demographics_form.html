@@ -1,7 +1,25 @@
 {% load forms %}
-{% input field="Demographics.first_name" %}
-{% input field="Demographics.surname" %}
-{% date_of_birth_field %}
-{% select field="Demographics.ethnicity" %}
-{% input field="Demographics.phone_number" %}
-{% textarea field="Demographics.contact_details" %}
+<div class="row">
+  <div class="col-md-6">
+    {% input field="Demographics.first_name" %}
+  </div>
+  <div class="col-md-6">
+    {% input field="Demographics.surname" %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    {% date_of_birth_field %}
+  </div>
+  <div class="col-md-6">
+    {% select field="Demographics.ethnicity" %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    {% input field="Demographics.phone_number" %}
+  </div>
+  <div class="col-md-6">
+    {% textarea field="Demographics.contact_details" %}
+  </div>
+</div>

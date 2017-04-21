@@ -1,23 +1,38 @@
 <span ng-show="item.soc_job">
-    [[ item.soc_job ]]
-   <br />
+  <b>
+    <span ng-show="item.start_year">
+      [[ item.start_year ]]
+      <span ng-show="item.end_year">
+        - [[ item.end_year ]]
+      </span>
+      [[ item.soc_job ]]
+  </b>
+  <br />
+  </span>
 </span>
-<span ng-show="item.job_tasks">
-    [[ item.job_tasks ]]
-   <br />
+
+<span ng-show="item.company_name">
+  <b>[[ item.company_name ]]</b><br />
 </span>
-<span ng-show="item.employer_output">
-    [[ item.employer_output ]]
-   <br />
-</span>
-<span ng-show="item.start_year">
-    [[ item.start_year ]]
-<span ng-show="item.end_year">
-  - [[ item.end_year ]]
-   <br />
-</span>
-</span>
+
 <span ng-show="item.address">
   [[ item.address ]]
-   <br />
+  <br />
+</span>
+
+<span ng-show="item.full_time">
+  Full time <br />
+</span>
+<span ng-show="item.job_tasks">
+  <i>Tasks:</i> [[ item.job_tasks ]]
+  <br />
+</span>
+<span ng-show="item.employer_output">
+  <i>Output:</i> [[ item.employer_output ]]
+  <br />
+</span>
+
+<span ng-show="item.job_working_area">
+  <i>Working Area:</i> [[ item.job_working_area ]]
+  <br />
 </span>

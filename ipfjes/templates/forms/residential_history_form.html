@@ -1,11 +1,28 @@
 {% load forms %}
 {% load ipfjes %}
 
-{% script_text "What was the address?" %}
-{% textarea  field="ResidentialHistory.address"  %}
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "What was the address?" %}
+  </div>
+  <div class="col-md-8">
+    {% textarea  field="ResidentialHistory.address"  %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "Do you remember how old you were or what year you moved in?" %}
+  </div>
+  <div class="col-md-8">
+    {% input  field="ResidentialHistory.start_year"  %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
 
-{% script_text "Do you remember how old you were or what year you moved in?" %}
-{% textarea  field="ResidentialHistory.start_year"  %}
-
-{% script_text "Do you remember how old you were or what year you moved out?" %}
-{% textarea  field="ResidentialHistory.end_year"  %}
+    {% script_text "Do you remember how old you were or what year you moved out?" %}
+  </div>
+  <div class="col-md-8">
+    {% input  field="ResidentialHistory.end_year"  %}
+  </div>
+</div>

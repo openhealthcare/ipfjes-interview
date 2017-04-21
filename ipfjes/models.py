@@ -72,9 +72,15 @@ class ResidentialHistory(models.PatientSubrecord):
 
 class CohabitationHistory(models.PatientSubrecord):
     _title = "Cohabitation History"
-    nameofperson = fields.CharField(max_length=250, blank=True, null=True)
+    nameofperson = fields.CharField(
+        max_length=250, blank=True, null=True,
+        verbose_name="Name of person"
+    )
     relationship = fields.CharField(max_length=250, blank=True, null=True)
-    howlong = fields.TextField(blank=True, null=True)
+    howlong = fields.TextField(
+        blank=True, null=True,
+        verbose_name="How long"
+    )
     occupation = fields.TextField(blank=True, null=True)
 
 class BirthPlace(models.PatientSubrecord):
@@ -85,6 +91,7 @@ class BirthPlace(models.PatientSubrecord):
 
 class SmokingHistory(models.EpisodeSubrecord):
     _title = 'Smoking History'
+    _is_singleton = True
 
     ever_smoked = fields.CharField(
         max_length=3, blank=True, null=True,
@@ -102,6 +109,8 @@ class SmokingHistory(models.EpisodeSubrecord):
 
 class Dyspnoea(models.EpisodeSubrecord):
     _title = 'mMRC Dispnoea'
+    _is_singleton = True
+
     breathless = fields.CharField(
         max_length=3, blank=True, null=True,
         choices=YES_NO_CHOICES
@@ -150,6 +159,7 @@ class AsbestosExposureHistory(models.EpisodeSubrecord):
 
 class DiagnosisHistory(models.EpisodeSubrecord):
   #  initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")
+    _is_singleton = True
     cough = fields.CharField(
         max_length=3, blank=True, null=True,
         choices=YES_NO_CHOICES
@@ -182,6 +192,8 @@ class GeneralNotes(models.EpisodeSubrecord):
     note = fields.TextField(blank=True, null=True, verbose_name="General notes")
 
 class StudyParticipantDetails(models.EpisodeSubrecord):
+    _is_singleton = True
+
     PARTICIPANT_TYPE = (("case", "case"), ("control", "control"))
     site = models.ForeignKeyOrFreeText(Site)
     participant_type = fields.CharField(max_length=12, choices=PARTICIPANT_TYPE, null=True, blank=True)
@@ -192,5 +204,3 @@ class StudyParticipantDetails(models.EpisodeSubrecord):
     email_address = fields.CharField(max_length=200, blank=True, null=True)
     postal_address = fields.TextField()
     comments = fields.TextField()
-
-

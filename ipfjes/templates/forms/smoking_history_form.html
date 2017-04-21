@@ -5,21 +5,50 @@
 {% radio field="SmokingHistory.ever_smoked" %}
 
 <div ng-hide="editing.smoking_history.ever_smoked != 'Yes' " >
+  <div class="row">
+    <div class="col-md-4">
+      {% script_text "What old were you when you started smoking?" %}
+    </div>
+    <div class="col-md-8">
+      {% input  field="SmokingHistory.start_smoking_age"  %}
+    </div>
+  </div>
 
-  {% script_text "What old were you when you started smoking?" %}
-  {% input  field="SmokingHistory.start_smoking_age"  %}
-
-  {% script_text "Do you still smoke?" %}
-  {% radio  field="SmokingHistory.current_smoker"  %}
+  <div class="row">
+    <div class="col-md-4">
+      {% script_text "Do you still smoke?" %}
+    </div>
+    <div class="col-md-8">
+      {% radio  field="SmokingHistory.current_smoker"  %}
+    </div>
+  </div>
 
   <div ng-show="editing.smoking_history.current_smoker == 'No'" >
-    {% script_text "How old were you when you stopped smoking?" %}
-    {% input  field="SmokingHistory.stop_smoking_age"  %}
+    <div class="row">
+      <div class="col-md-4">
+        {% script_text "How old were you when you stopped smoking?" %}
+      </div>
+      <div class="col-md-8">
+        {% input  field="SmokingHistory.stop_smoking_age"  %}
+      </div>
+    </div>
   </div>
-  
-  {% script_text "How many, on average, a day [[ editing.smoking_history.current_smoker == 'Yes' ? 'do you' : 'did you';]] smoke?" %}
-  {% input  field="SmokingHistory.cigarettes_per_day"  %}
 
-  {% script_text "What [[ editing.smoking_history.current_smoker == 'Yes' ? 'do you' : 'did you';]] smoke?" %}
-  {% textarea  field="SmokingHistory.what_do_you_smoke"  %}
+  <div class="row">
+    <div class="col-md-4">
+      {% script_text "How many, on average, a day [[ editing.smoking_history.current_smoker == 'Yes' ? 'do you' : 'did you';]] smoke?" %}
+    </div>
+    <div class="col-md-8">
+      {% input  field="SmokingHistory.cigarettes_per_day"  %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      {% script_text "What [[ editing.smoking_history.current_smoker == 'Yes' ? 'do you' : 'did you';]] smoke?" %}
+    </div>
+    <div class="col-md-8">
+      {% input  field="SmokingHistory.what_do_you_smoke"  %}
+    </div>
+  </div>
 </div>
