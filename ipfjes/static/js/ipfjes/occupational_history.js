@@ -1,9 +1,54 @@
 angular.module('opal.controllers').controller(
     'OccupationalHistoryCtrl',
-    function(SocCodeService, scope, step, episode){
-        "use strict"
-        scope.get_soc_details = function(editing){
-            return '/soc/details/?title=' + editing.soc_job
+    function(scope, step, episode, SocCodeService){
+        "use strict";
+
+        var getClient = function(oh){
+          var clientDefaults = {
+            // the id used in the name
+            id: _.uniqueId("occupational_history"),
+
+            // the job matches for the lookup
+            matches: [],
+
+            // the job that has been selected but not confirmed
+            job: null
+          };
+
+          // whether we're in the edit mode for the job
+          clientDefaults.editJob = !oh.soc_job;
+
+          var existingClient = oh._client || {};
+
+          return _.extend(clientDefaults, existingClient);
+        };
+
+        scope.select = function(job, client){
+          client.job = job;
+        };
+
+        scope.filterChanged = function(client){
+          if(client.soc_job_filter && client.soc_job_filter.length > 2){
+            client.matches = _.filter(scope.socjob_list, function(j){
+              return j.toLowerCase().indexOf(client.soc_job_filter.toLowerCase()) != -1;
+            });
+          }
+        };
+
+        scope.confirm = function(oh){
+          oh.soc_job = oh._client.job;
+          oh._client.soc_job_filter = null;
+          oh._client.editJob = false;
+        };
+
+        scope.get_soc_details = function(client){
+          if(client.job){
+            return '/soc/details/?title=' + client.job;
+          }
+        };
+
+        scope.switchToEditJob = function(client){
+          client.editJob = true;
         };
 
         scope.socCodes = {};
@@ -20,9 +65,7 @@ angular.module('opal.controllers').controller(
           // occupational history, put it on a var in _client
           // and remove it from the standard list
           _.each(scope.editing.occupational_history, function(oh){
-            if(!oh._client){
-              oh._client = {id: _.uniqueId("occupational_history")};
-            }
+            oh._client = getClient(oh);
 
             var nestedAeh = {};
 
@@ -57,9 +100,7 @@ angular.module('opal.controllers').controller(
               oh._client = {};
             }
 
-            if(!oh._client.id){
-              oh._client.id = _.uniqueId("occupational_history");
-            }
+            oh._client = getClient(oh);
           });
         });
 

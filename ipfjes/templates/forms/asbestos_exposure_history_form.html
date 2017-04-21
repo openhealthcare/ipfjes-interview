@@ -8,6 +8,14 @@
     {% input  field="AsbestosExposureHistory.description"  %}
   </div>
 </div>
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "Was this related to a job" %}
+  </div>
+  <div class="col-md-8">
+    {% select_object field="AsbestosExposureHistory.related_occupation" lookuplist="get_occupation_history()" %}
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-4">

@@ -1,5 +1,5 @@
 angular.module('opal.services').factory('SocCodeService', function($http, $q, $window){
-  var url = '/ipfjes_api/v0.1/soc_code_view_set/';
+  var url = '/ipfjes_api/v0.1/soc_code_at_risk/';
   var load = function(){
     var deferred = $q.defer();
     $http({ cache: true, url: url, method: 'GET'}).then(function(response) {
