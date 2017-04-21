@@ -14,7 +14,7 @@ angular.module('opal.controllers').controller(
                     return
                 }
                 scope.matches = _.filter(scope.referencedata.socjob, function(j){
-                    return j.indexOf(scope.query.soc_job_filter) != -1;
+                    return j.toLowerCase().indexOf(scope.query.soc_job_filter.toLowerCase()) != -1;
                 })
             })
 
