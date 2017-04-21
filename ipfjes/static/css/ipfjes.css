@@ -8,3 +8,11 @@ body {
   padding-left: 18px;
   padding-right: 18px;
 }
+
+.job-matches,
+.job-desc {
+  font-size: 14px;
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
