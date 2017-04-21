@@ -183,12 +183,13 @@ class DiagnosisHistory(models.EpisodeSubrecord):
 
 class SocCode(models.models.Model):
     soc90 = fields.CharField(max_length=200)
-    soc2000  = fields.CharField(max_length=200)
+    soc2000 = fields.CharField(max_length=200)
     title = fields.CharField(max_length=255)
     short_desc = fields.TextField()
     entry = fields.TextField()
     tasks = fields.TextField()
     related = fields.TextField()
+
 
 class GeneralNotes(models.EpisodeSubrecord):
     _title = "General Notes"

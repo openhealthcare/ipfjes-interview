@@ -18,7 +18,11 @@
   <div class="col-md-8">
     {% textarea  field="OccupationalHistory.job_tasks"  %}
   </div>
-
+</div>
+<div ng-show="socCodes[editing.occupational_history.soc_job]">
+  <div ng-repeat="editing in [editing.occupational_history._client.aeh]">
+    {% include models.AsbestosExposureHistory.get_form_template %}
+  </div>
 </div>
 <div class="row">
 

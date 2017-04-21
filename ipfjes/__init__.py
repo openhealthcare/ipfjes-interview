@@ -10,6 +10,7 @@ class Application(application.OpalApplication):
         'js/ipfjes/occupational_history.js',
         'js/ipfjes/asbestos_exposure_history.js',
         'js/opal/controllers/discharge.js',
+        'js/ipfjes/soc_code.js',
         # Uncomment this if you want to implement custom dynamic flows.
         # 'js/ipfjes/flow.js',
     ]
