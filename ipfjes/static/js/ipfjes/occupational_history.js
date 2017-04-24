@@ -4,6 +4,9 @@ angular.module('opal.controllers').controller(
         "use strict";
 
         var getClient = function(oh){
+          if(!oh){
+            oh = {};
+          }
           var clientDefaults = {
             // the id used in the name
             id: _.uniqueId("occupational_history"),
@@ -36,7 +39,7 @@ angular.module('opal.controllers').controller(
         };
 
         scope.confirm = function(oh){
-          oh.soc_job = oh._client.job;
+          oh.soc_job = oh._client.job || oh._client.soc_job_filter;
           oh._client.soc_job_filter = null;
           oh._client.editJob = false;
         };
@@ -49,6 +52,13 @@ angular.module('opal.controllers').controller(
 
         scope.switchToEditJob = function(client){
           client.editJob = true;
+        };
+
+        // this function overrides the pathway directive's add another
+        scope.addAnother = function(){
+            var c = getClient();
+            c.completed = false;
+            scope.editing.occupational_history.push({_client: c});
         };
 
         scope.socCodes = {};
