@@ -1,5 +1,7 @@
 from pathway import pathways, steps
 from ipfjes import models
+from django.db import transaction
+
 
 class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Add new participant"
@@ -22,10 +24,10 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     steps = (
         steps.Step(display_name = "Introduction",
                    template="interview_introduction.html"),
-        steps.Step(
+        steps.MultiModelStep(
             model=models.OccupationalHistory,
             template="interview_occupational_history.html",
-            step_controller="OccupationalHistoryCtrl"
+            step_controller="OccupationalHistoryCtrl",
         ),
         steps.Step(
             display_name="Residential History",
@@ -33,18 +35,33 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             ),
         steps.MultiModelStep(
             model=models.AsbestosExposureHistory,
-            step_controller="AsbestosExposureHistoryCtrl"
+            step_controller="AsbestosExposureHistoryCtrl",
         ),
         models.SmokingHistory,
         models.Dyspnoea,
-        models.Treatment,
-        models.PastMedicalHistory,
-        models.BloodRelationHistory,
+        steps.MultiModelStep(
+            model=models.Treatment,
+            delete_others=True
+        ),
+        steps.MultiModelStep(
+            model=models.PastMedicalHistory,
+            delete_others=True
+        ),
+        steps.MultiModelStep(
+            model=models.BloodRelationHistory,
+            delete_others=True
+        ),
         models.DiagnosisHistory,
         models.StudyParticipantDetails,
     )
 
+    @transaction.atomic
     def save(self, data, user):
+        steps.delete_others(data, models.OccupationalHistory, patient=self.patient, episode=self.episode)
+        steps.delete_others(data, models.ResidentialHistory, patient=self.patient, episode=self.episode)
+        steps.delete_others(data, models.CohabitationHistory, patient=self.patient, episode=self.episode)
+        steps.delete_others(data, models.AsbestosExposureHistory, patient=self.patient, episode=self.episode)
+
         asbestos_exposure_histories = data.pop(
             "asbestos_exposure_history", []
         )
