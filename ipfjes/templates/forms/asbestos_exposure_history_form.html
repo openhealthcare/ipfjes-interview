@@ -5,15 +5,7 @@
     {% script_text "Tell me about your contact with asbestos" %}
   </div>
   <div class="col-md-8">
-    {% input  field="AsbestosExposureHistory.description"  %}
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    {% script_text "Was this related to a job" %}
-  </div>
-  <div class="col-md-8">
-    {% select_object field="AsbestosExposureHistory.related_occupation" lookuplist="get_occupation_history()" %}
+    {% input field="AsbestosExposureHistory.description"  %}
   </div>
 </div>
 
@@ -22,7 +14,7 @@
     {% script_text "What was the asbestos containing material?" %}
   </div>
   <div class="col-md-8">
-    {% input  field="AsbestosExposureHistory.asbestos_material"  %}
+    {% input field="AsbestosExposureHistory.asbestos_material"  %}
   </div>
 </div>
 
@@ -31,7 +23,7 @@
     {% script_text "What was done with it?" %}
   </div>
   <div class="col-md-8">
-    {% input  field="AsbestosExposureHistory.handling"  %}
+    {% input field="AsbestosExposureHistory.handling"  %}
   </div>
 </div>
 
@@ -40,7 +32,7 @@
     {% script_text "Was this done within your arms reach?" %}
   </div>
   <div class="col-md-8">
-    {% input  field="AsbestosExposureHistory.near_or_far_field"  %}
+    {% input field="AsbestosExposureHistory.near_or_far_field"  %}
   </div>
 </div>
 
