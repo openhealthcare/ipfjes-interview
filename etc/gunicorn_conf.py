@@ -1,6 +1,6 @@
 bind = "127.0.0.1:4567"
-logfile = "/usr/lib/drcjar/log/elcid.gunicorn.log"
+logfile = "/home/drcjar/ipfjes-logs/elcid.gunicorn.log"
 workers = 3
 timeout = 120
-accesslog = "/usr/lib/drcjar/log/elcid.access.log"
-errorlog = "/usr/lib/drcjar/log/elcid.error.log"
+accesslog = "/home/drcjar/ipfjes-logs/elcid.access.log"
+errorlog = "/home/drcjar/ipfjes-logs/elcid.error.log"
