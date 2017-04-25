@@ -20,7 +20,7 @@ angular.module('opal.controllers').controller(
             var result = {};
 
             _.each(scope.editing.occupational_history, function(oh){
-              var resultKey = oh.soc_job;
+              var resultKey = oh.company_name;
               if(oh.start_year && oh.end_year){
                 resultKey = resultKey + " " + oh.start_year + "-" + oh.end_year;
               }
