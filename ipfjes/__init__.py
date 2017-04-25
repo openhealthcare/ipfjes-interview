@@ -1,6 +1,8 @@
 """
 ipfjes - Our Opal Application
 """
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ipfjes.settings")
 from opal.core import application, menus
 
 class Application(application.OpalApplication):

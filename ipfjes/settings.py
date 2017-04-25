@@ -277,5 +277,5 @@ if "test" in sys.argv:
 
 try:
     from local_settings import *
-except:
+except ImportError:
     pass

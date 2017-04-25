@@ -1,6 +1,9 @@
 from django.contrib import admin
 from ipfjes import models
 
-class OccupationalHistoryAdmin(admin.ModelAdmin):
-    pass
-#admin.site.register(models.OccupationalHistory, OccupationalHistoryAdmin)
+class SocCodeAdmin(admin.ModelAdmin):
+    search_fields = ['title', 'soc90', 'soc2000']
+    list_display = ['title', 'soc90', 'soc2000']
+
+
+admin.site.register(models.SocCode, SocCodeAdmin)

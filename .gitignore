@@ -11,4 +11,6 @@
 .coverage
 htmlcov
 libpeerconnection.log
+ipfjes/local_settings.py
+etc/gunicorn.conf
 *#
