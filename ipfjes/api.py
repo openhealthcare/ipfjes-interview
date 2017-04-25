@@ -9,7 +9,7 @@ RISK_PRONE_CODES = [
 ]
 
 
-class SocCodeViewSet(opal_api.LoginRequiredViewset):
+class SocCodeRiskViewSet(opal_api.LoginRequiredViewset):
     """
     Provides applications with information about all system users
     """
@@ -21,16 +21,10 @@ class SocCodeViewSet(opal_api.LoginRequiredViewset):
         """
         return json_response(list(
             SocCode.objects.filter(soc90__in=RISK_PRONE_CODES).values(
-                # "soc90",
-                # "soc2000",
                 "title",
-                # "short_desc",
-                # "entry",
-                # "tasks",
-                # "related"
             )
         ))
 
 router = opal_api.OPALRouter()
 
-router.register("soc_code_at_risk", SocCodeViewSet)
+router.register("soc_code_at_risk", SocCodeRiskViewSet)

@@ -32,19 +32,19 @@
     </div>
     <div class="col-md-1">
       <h4>Classification</h4>
-      <button ng-click="confirm(editing.occupational_history)" class="btn btn-primary btn-lg">
+      <a ng-click="confirm(editing.occupational_history)" class="btn btn-primary btn-lg">
         Confirm
-      </button>
+      </a>
     </div>
   </div>
 </div>
 <div ng-show="!editing.occupational_history._client.editJob" class="row">
   <div class="col-md-12">
     <strong>Job Title: [[ editing.occupational_history.soc_job ]]
-      <button ng-click="switchToEditJob(editing.occupational_history._client)" class="btn btn-primary">
+      <a ng-click="switchToEditJob(editing.occupational_history._client)" class="btn btn-primary">
         {% icon "fa-edit" %}
         Edit
-      </button>
+      </a>
     </strong>
   </div>
 </div>

@@ -11,7 +11,7 @@ urlpatterns = patterns(
     '',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^soc/details/', views.SocCodeDetailView.as_view()),
-        url(r'ipfjes_api/v0.1/', include(api.router.urls)),
+    url(r'ipfjes_api/v0.1/', include(api.router.urls)),
 )
 
 urlpatterns += opatterns
