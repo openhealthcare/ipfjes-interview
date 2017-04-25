@@ -14,7 +14,7 @@ class Command(BaseCommand):
         csvfile = ffs.Path.here().parent.parent + '/data/soc2000vol1.csv'
         with csvfile.csv(header=True) as csv:
             for i, row in enumerate(csv):
-                soc_code = models.SocCode(
+                soc_code, _ = models.SocCode.objects.get_or_create(
                     soc90=row.soc,
                     soc2000=row.soc2000,
                     title=row.indexocc,
@@ -23,7 +23,6 @@ class Command(BaseCommand):
                     tasks=row.tasks,
                     related=row.related
                 )
-                soc_code.save()
                 print 'Saved', i, soc_code
 
     def as_lookup_list(self):
