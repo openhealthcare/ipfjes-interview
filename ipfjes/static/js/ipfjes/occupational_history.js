@@ -10,7 +10,7 @@ angular.module('opal.controllers').controller(
           var clientDefaults = {
             // the id used in the name
             id: _.uniqueId("occupational_history"),
-
+            aeh: {},
             // the job matches for the lookup
             matches: [],
 
@@ -19,6 +19,7 @@ angular.module('opal.controllers').controller(
           };
 
           // whether we're in the edit mode for the job
+
           clientDefaults.editJob = !oh.soc_job;
 
           var existingClient = oh._client || {};
@@ -71,31 +72,37 @@ angular.module('opal.controllers').controller(
         });
 
         scope.initialise = function(){
-          // if we've got an asbestos_exposure_history for this
-          // occupational history, put it on a var in _client
-          // and remove it from the standard list
-          _.each(scope.editing.occupational_history, function(oh){
-            oh._client = getClient(oh);
+          if(!scope.editing.occupational_history.length){
+            var oh = {_client: getClient()};
+            oh._client.completed = false;
+            scope.editing.occupational_history.push(oh);
+          }
+          else{
+            // if we've got an asbestos_exposure_history for this
+            // occupational history, put it on a var in _client
+            // and remove it from the standard list
+            _.each(scope.editing.occupational_history, function(oh){
+              oh._client = getClient(oh);
 
-            var nestedAeh = {};
+              var nestedAeh = {};
 
-            if(oh.id){
-              var foundNestedAeh = _.findWhere(scope.editing.asbestos_exposure_history, {related_occupation_id: oh.id});
-              scope.editing.asbestos_exposure_history = _.filter(scope.editing.asbestos_exposure_history, function(aeh){
-                return aeh.related_occupation_id !== oh.id;
-              });
+              if(oh.id){
+                var foundNestedAeh = _.findWhere(scope.editing.asbestos_exposure_history, {related_occupation_id: oh.id});
+                scope.editing.asbestos_exposure_history = _.filter(scope.editing.asbestos_exposure_history, function(aeh){
+                  return aeh.related_occupation_id !== oh.id;
+                });
 
-              if(foundNestedAeh){
-                nestedAeh = foundNestedAeh;
+                if(foundNestedAeh){
+                  nestedAeh = foundNestedAeh;
+                }
               }
-            }
-            nestedAeh.related_occupation_id = oh._client.id;
+              nestedAeh.related_occupation_id = oh._client.id;
 
-            oh._client.aeh = {
-              asbestos_exposure_history: nestedAeh
-            };
-          });
-
+              oh._client.aeh = {
+                asbestos_exposure_history: nestedAeh
+              };
+            });
+          }
           // load in the code service
           SocCodeService.load().then(function(data){
             _.each(data, function(d){
