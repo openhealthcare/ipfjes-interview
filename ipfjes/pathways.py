@@ -1,6 +1,7 @@
 from pathway import pathways, steps
 from ipfjes import models
 
+
 class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Add new participant"
     slug = "new"
@@ -49,7 +50,7 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         )
         occupational_histories = data.pop("occupational_history", [])
         occupational_history_ids = [
-            i.pop("occupational_history_client_id") for i in occupational_histories
+            i.pop("occupational_history_client_id", None) for i in occupational_histories
         ]
         patient, episode = super(Interview, self).save(data, user)
 
