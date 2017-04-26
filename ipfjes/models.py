@@ -147,7 +147,7 @@ class EverEncounteredAsbestos(models.EpisodeSubrecord):
 
 class AsbestosExposureHistory(models.EpisodeSubrecord):
     NEAR_FAR_CHOICES = (('Near', 'Near'), ('Far', 'Far'))
-    description = fields.TextField()
+    description = fields.TextField(blank=True, null=True)
     asbestos_material = models.ForeignKeyOrFreeText(AsbestosMaterial)
     near_or_far_field = fields.CharField(
         max_length=4, blank=True, null=True,
