@@ -1,37 +1,51 @@
 {% load forms %}
 {% load ipfjes %}
 
-<div class="row">
-  <div class="col-md-4">
-    {% script_text "What was the name of your job?" %}
-  </div>
-  <div class="col-md-8">
-    {% input label="Job title search" model="query.soc_job_filter" %}
-  </div>
-  <div class="col-md-3">
-    <h4>
-      Matches
-      <span ng-show="matches.length > 0">
-        ([[ matches.length ]])
-      </span>
-    </h4>
-    <ul class="well job-matches">
-      <li ng-repeat="job in matches" ng-click="select(job)" class="pointer">
-        [[ job ]]
-      </li>
-    </ul>
-  </div>
-  <div class="col-md-7">
-    <h4>Description</h4>
-    <div class="well job-desc">
-      <ng-include src="get_soc_details()"></ng-include>
+<div ng-show="editing.occupational_history._client.editJob">
+  <div class="row">
+    <div class="col-md-4">
+      {% script_text "What was the name of your job?" %}
+    </div>
+    <div class="col-md-8">
+      {% input label="Job title search" model="editing.occupational_history._client.soc_job_filter" change="filterChanged(editing.occupational_history._client)" %}
     </div>
   </div>
-  <div class="col-md-1">
-    <h4>Classification</h4>
-    <button class="btn btn-primary btn-lg">
-      Confirm
-    </button>
+  <div ng-show="editing.occupational_history._client.soc_job_filter" class="row">
+    <div class="col-md-3">
+      <h4>
+        Matches
+        <span ng-show="matches.length > 0">
+          ([[ matches.length ]])
+        </span>
+      </h4>
+      <ul class="well job-matches">
+        <li ng-repeat="job in editing.occupational_history._client.matches" ng-click="select(job, editing.occupational_history._client)" class="pointer">
+          [[ job ]]
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-7">
+      <h4>Description</h4>
+      <div class="well job-desc">
+        <ng-include src="get_soc_details(editing.occupational_history._client)"></ng-include>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <h4>Classification</h4>
+      <a ng-click="confirm(editing.occupational_history)" class="btn btn-primary btn-lg">
+        Confirm
+      </a>
+    </div>
+  </div>
+</div>
+<div ng-show="!editing.occupational_history._client.editJob" class="row">
+  <div class="col-md-12">
+    <strong>Job Title: [[ editing.occupational_history.soc_job ]]
+      <a ng-click="switchToEditJob(editing.occupational_history._client)" class="btn btn-primary">
+        {% icon "fa-edit" %}
+        Edit
+      </a>
+    </strong>
   </div>
 </div>
 
@@ -42,7 +56,11 @@
   <div class="col-md-8">
     {% textarea  field="OccupationalHistory.job_tasks"  %}
   </div>
-
+</div>
+<div ng-show="socCodes[editing.occupational_history.soc_job]">
+  <div ng-repeat="editing in [editing.occupational_history._client.aeh]">
+    {% include models.AsbestosExposureHistory.get_form_template %}
+  </div>
 </div>
 <div class="row">
 

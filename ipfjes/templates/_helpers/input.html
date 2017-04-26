@@ -5,7 +5,7 @@
     {% if icon %}<i class="{{icon}}"></i> {% endif %}
     {{ label }}
   </label>
-  <div ng-class="{{ formname }}.$submitted && {{ formname }}[{{ element_name }}].$error.required">
+  <div ng-class="{'errored-state': {{ formname }}.$submitted && {{ formname }}[{{ element_name }}].$error.required}">
 	<input class="form-control" type="{{ element_type }}" ng-model="{{ model }}"
            autocomplete="off"
            {% for d in directives %}{{ d }} {% endfor %}

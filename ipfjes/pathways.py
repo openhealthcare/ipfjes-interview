@@ -1,6 +1,7 @@
 from pathway import pathways, steps
 from ipfjes import models
 
+
 class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Add new participant"
     slug = "new"
@@ -20,8 +21,10 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Interview"
     slug = "interview"
     steps = (
-        steps.Step(display_name = "Introduction",
-                   template="interview_introduction.html"),
+        steps.Step(
+            display_name="Introduction",
+            template="interview_introduction.html"
+        ),
         steps.Step(
             model=models.OccupationalHistory,
             template="interview_occupational_history.html",
@@ -30,11 +33,8 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         steps.Step(
             display_name="Residential History",
             template='interview_residential_history.html'
-            ),
-        steps.MultiModelStep(
-            model=models.AsbestosExposureHistory,
-            step_controller="AsbestosExposureHistoryCtrl"
         ),
+        models.AsbestosExposureHistory,
         models.SmokingHistory,
         models.Dyspnoea,
         models.Treatment,

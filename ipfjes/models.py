@@ -147,7 +147,7 @@ class EverEncounteredAsbestos(models.EpisodeSubrecord):
 
 class AsbestosExposureHistory(models.EpisodeSubrecord):
     NEAR_FAR_CHOICES = (('Near', 'Near'), ('Far', 'Far'))
-    description = fields.TextField()
+    description = fields.TextField(blank=True, null=True)
     asbestos_material = models.ForeignKeyOrFreeText(AsbestosMaterial)
     near_or_far_field = fields.CharField(
         max_length=4, blank=True, null=True,
@@ -183,12 +183,13 @@ class DiagnosisHistory(models.EpisodeSubrecord):
 
 class SocCode(models.models.Model):
     soc90 = fields.CharField(max_length=200)
-    soc2000  = fields.CharField(max_length=200)
+    soc2000 = fields.CharField(max_length=200)
     title = fields.CharField(max_length=255)
     short_desc = fields.TextField()
     entry = fields.TextField()
     tasks = fields.TextField()
     related = fields.TextField()
+
 
 class GeneralNotes(models.EpisodeSubrecord):
     _title = "General Notes"
