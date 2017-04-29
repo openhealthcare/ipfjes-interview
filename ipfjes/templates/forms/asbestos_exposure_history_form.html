@@ -1,64 +1,64 @@
 {% load forms %}
 {% load ipfjes %}
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     {% script_text "Tell me about your contact with asbestos" %}
   </div>
-  <div class="col-md-7">
-    {% textarea  field="AsbestosExposureHistory.description"  %}
+  <div class="col-md-8">
+    {% input field="AsbestosExposureHistory.description"  %}
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     {% script_text "What was the asbestos containing material?" %}
   </div>
-  <div class="col-md-7">
-    {% input  field="AsbestosExposureHistory.asbestos_material"  %}
+  <div class="col-md-8">
+    {% input field="AsbestosExposureHistory.asbestos_material"  %}
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     {% script_text "What was done with it?" %}
   </div>
-  <div class="col-md-7">
-    {% input  field="AsbestosExposureHistory.handling"  %}
+  <div class="col-md-8">
+    {% input field="AsbestosExposureHistory.handling"  %}
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     {% script_text "Was this done within your arms reach?" %}
   </div>
-  <div class="col-md-7">
-    {% select  field="AsbestosExposureHistory.near_or_far_field"  %}
+  <div class="col-md-8">
+    {% input field="AsbestosExposureHistory.near_or_far_field"  %}
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     {% script_text "Where was the task completed?" %}
   </div>
-  <div class="col-md-7">
+  <div class="col-md-8">
     {% input  field="AsbestosExposureHistory.task_location"  %}
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     {% script_text "How long did the task take and how often did you do it?" %}
   </div>
-  <div class="col-md-7">
+  <div class="col-md-8">
     {% input  field="AsbestosExposureHistory.percent_task"  %}
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     {% script_text "Did you wear a mask?" %}
   </div>
-  <div class="col-md-7">
+  <div class="col-md-8">
     {% input  field="AsbestosExposureHistory.mask"  %}
   </div>
 </div>

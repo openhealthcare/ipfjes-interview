@@ -2,6 +2,7 @@
 ipfjes models.
 """
 from django.db.models import fields
+from django.db import models as django_models
 
 from opal import models
 from opal.core import lookuplists
@@ -146,16 +147,19 @@ class EverEncounteredAsbestos(models.EpisodeSubrecord):
 
 class AsbestosExposureHistory(models.EpisodeSubrecord):
     NEAR_FAR_CHOICES = (('Near', 'Near'), ('Far', 'Far'))
-    description = fields.TextField()
+    description = fields.TextField(blank=True, null=True)
     asbestos_material = models.ForeignKeyOrFreeText(AsbestosMaterial)
     near_or_far_field = fields.CharField(
         max_length=4, blank=True, null=True,
         choices=NEAR_FAR_CHOICES
     )
-    handling =  models.ForeignKeyOrFreeText(AsbestosHandling)
+    handling = models.ForeignKeyOrFreeText(AsbestosHandling)
+    related_occupation = django_models.ForeignKey(
+        OccupationalHistory, null=True, blank=True
+    )
     percent_task = fields.FloatField(blank=True, null=True)
-    task_location =  models.ForeignKeyOrFreeText(TaskLocation)
-    mask =  models.ForeignKeyOrFreeText(Mask)
+    task_location = models.ForeignKeyOrFreeText(TaskLocation)
+    mask = models.ForeignKeyOrFreeText(Mask)
 
 class DiagnosisHistory(models.EpisodeSubrecord):
   #  initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")
@@ -179,12 +183,13 @@ class DiagnosisHistory(models.EpisodeSubrecord):
 
 class SocCode(models.models.Model):
     soc90 = fields.CharField(max_length=200)
-    soc2000  = fields.CharField(max_length=200)
+    soc2000 = fields.CharField(max_length=200)
     title = fields.CharField(max_length=255)
     short_desc = fields.TextField()
     entry = fields.TextField()
     tasks = fields.TextField()
     related = fields.TextField()
+
 
 class GeneralNotes(models.EpisodeSubrecord):
     _title = "General Notes"

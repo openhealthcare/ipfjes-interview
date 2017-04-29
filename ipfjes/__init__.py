@@ -1,6 +1,8 @@
 """
 ipfjes - Our Opal Application
 """
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ipfjes.settings")
 from opal.core import application, menus
 
 class Application(application.OpalApplication):
@@ -9,6 +11,7 @@ class Application(application.OpalApplication):
         'js/ipfjes/routes.js',
         'js/ipfjes/occupational_history.js',
         'js/opal/controllers/discharge.js',
+        'js/ipfjes/soc_code.js',
         # Uncomment this if you want to implement custom dynamic flows.
         # 'js/ipfjes/flow.js',
     ]
