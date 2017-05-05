@@ -79,5 +79,5 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             episode, asbestos_exposure_histories, user
         )
 
-        episode.set_tag_names(["needs_interview"], user)
+        episode.set_tag_names([], user)
         return patient, episode

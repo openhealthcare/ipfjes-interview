@@ -28,5 +28,4 @@ class ParticipantsToCallList(core.patient_lists.PatientList):
         core.patient_lists.Column(name = "actions", title = "Actions", template_path = "interview_actions.html")
         ]
     def get_queryset(self, **kwargs):
-        return Episode.objects.filter(tagging__value="needs_interview")
-
+        return Episode.objects.filter(tagging__value="needs_interview", tagging__archived=False)

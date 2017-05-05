@@ -144,6 +144,7 @@ class BloodRelationHistory(models.EpisodeSubrecord):
     relation = models.ForeignKeyOrFreeText(Relationship)
 
 
+    # TODO: Delete this?
 class EverEncounteredAsbestos(models.EpisodeSubrecord):
     contact_with = fields.CharField(
         max_length=3, blank=True, null=True,
