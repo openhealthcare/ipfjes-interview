@@ -62,10 +62,14 @@ angular.module('opal.controllers').controller(
             scope.editing.occupational_history.push({_client: c});
         };
 
-        scope.addAnotherAEH = function(occupation){
-            var c = {_client: {completed: false}};
-            occupation._client.aeh.asbestos_exposure_history.push(c)
-        }
+        scope.addAnotherAEH = function(asbestos_exposure_history){
+          var c = {_client: {completed: false, id: _.uniqueId("asbestos_exposure_history")}};
+          asbestos_exposure_history.push(c);
+        };
+
+        scope.removeAEH = function(asbestos_exposure_history, index){
+          asbestos_exposure_history.splice(index, 1);
+        };
 
 
         scope.socCodes = {};

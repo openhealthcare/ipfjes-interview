@@ -74,11 +74,11 @@
     <div save-multiple-wrapper="editing.asbestos_exposure_history">
       <div ng-repeat="editing in model.subrecords">
         {% include models.AsbestosExposureHistory.get_form_template %}
-        <button class="btn btn-default" ng-click="remove($index)">Remove</button>
+        <button class="btn btn-default" ng-click="removeAEH(model.subrecords, $index)">Remove</button>
       </div>
 
       <button class="btn btn-default"
-              ng-click="addAnotherAEH(occupation)">
+              ng-click="addAnotherAEH(editing.asbestos_exposure_history)">
         Add another
       </button>
     </div>
