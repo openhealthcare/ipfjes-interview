@@ -34,13 +34,24 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             display_name="Residential History",
             template='interview_residential_history.html'
         ),
-        models.AsbestosExposureHistory,
         models.SmokingHistory,
         models.Dyspnoea,
-        models.Treatment,
+        models.ScarringDrugs,
         models.PastMedicalHistory,
         models.BloodRelationHistory,
-        models.DiagnosisHistory,
+        steps.Step(
+            template='interview_asbestos.html',
+            display_name='Asbestos Exposure History'
+        ),
+        steps.Step(
+            model=models.DiagnosisHistory,
+            display_name='{0} (for cases only)'.format(
+                models.DiagnosisHistory.get_display_name())
+        ),
+        steps.Step(
+            template='interview_ethnicity.html',
+            display_name='Ethnicity'
+        ),
         models.StudyParticipantDetails,
     )
 

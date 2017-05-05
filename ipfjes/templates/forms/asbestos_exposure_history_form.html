@@ -2,19 +2,33 @@
 {% load ipfjes %}
 <div class="row">
   <div class="col-md-4">
-    {% script_text "Tell me about your contact with asbestos" %}
+    {% script_text "Describe the task" %}
   </div>
   <div class="col-md-8">
-    {% input field="AsbestosExposureHistory.description"  %}
+    {% textarea field="AsbestosExposureHistory.description"  %}
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-12">
     {% script_text "What was the asbestos containing material?" %}
   </div>
-  <div class="col-md-8">
-    {% input field="AsbestosExposureHistory.asbestos_material"  %}
+  <div class="col-md-6">
+    {% radio field="AsbestosExposureHistory.asbestos_type" %}
+    {% radio field="AsbestosExposureHistory.asbestos_percentage" %}
+  </div>
+  <div class="col-md-6">
+    <p>
+      Cloth and yarns are 100% asbestos, generally chrysotile although pre-1965
+      other asbestos types could have been used. Insulation boards are generally
+      around 20 - 40% amosite or a mixture of amosite and chrysotile. Cements are
+      in the 10-15% category and are generally chrysotile.
+    </p>
+    <p>
+      Bonding of asbestos into a matrix, for example in boards (cements and
+      insulation boards), should reduce substance emission potential by a further
+      factor of three.
+    </p>
   </div>
 </div>
 
@@ -23,7 +37,19 @@
     {% script_text "What was done with it?" %}
   </div>
   <div class="col-md-8">
-    {% input field="AsbestosExposureHistory.handling"  %}
+    {% select field="AsbestosExposureHistory.handling"  %}
+    <p class="text-muted">
+      *  Note, use of water to control exposure during delagging is treated in the control section.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "Were there any local controls? (Measures taken to reduce exposure to asbestos e.g. wetting)" %}
+  </div>
+  <div class="col-md-8">
+    {% select field="AsbestosExposureHistory.local_controls"  %}
   </div>
 </div>
 
@@ -32,25 +58,37 @@
     {% script_text "Was this done within your arms reach?" %}
   </div>
   <div class="col-md-8">
-    {% input field="AsbestosExposureHistory.near_or_far_field"  %}
+    {% select field="AsbestosExposureHistory.near_or_far_field"  %}
+  </div>
+  <div class="col-md-4">
+    {% script_text "How big was the room?" %}
+  </div>
+  <div class="col-md-8">
+    {% select field="AsbestosExposureHistory.room_volume"  %}
+  </div>
+  <div class="col-md-4">
+    {% script_text "How many times per hour did the air change?" %}
+  </div>
+  <div class="col-md-8">
+    {% select field="AsbestosExposureHistory.room_air_changes"  %}
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-4">
-    {% script_text "Where was the task completed?" %}
-  </div>
-  <div class="col-md-8">
-    {% input  field="AsbestosExposureHistory.task_location"  %}
-  </div>
-</div>
 
 <div class="row">
   <div class="col-md-4">
-    {% script_text "How long did the task take and how often did you do it?" %}
+    {% script_text "How much time did the task take in minutes?" %}
   </div>
   <div class="col-md-8">
-    {% input  field="AsbestosExposureHistory.percent_task"  %}
+    {% input  field="AsbestosExposureHistory.task_duration"  %}
+  </div>
+  <div class="col-md-4">
+    {% script_text "How frequently did you do this task?" %}
+  </div>
+  <div class="col-md-8">
+    {% input  field="AsbestosExposureHistory.task_frequency"  %}
+    per
+    {% select  field="AsbestosExposureHistory.task_periodicity"  %}
   </div>
 </div>
 
@@ -59,6 +97,14 @@
     {% script_text "Did you wear a mask?" %}
   </div>
   <div class="col-md-8">
-    {% input  field="AsbestosExposureHistory.mask"  %}
+    {% select  field="AsbestosExposureHistory.mask" %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "Were they correctly worn or properly maintained?" %}
+  </div>
+  <div class="col-md-8">
+    {% select  field="AsbestosExposureHistory.mask_compliance" %}
   </div>
 </div>

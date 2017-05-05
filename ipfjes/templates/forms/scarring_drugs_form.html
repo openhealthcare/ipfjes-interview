@@ -1,0 +1,21 @@
+{% load forms %}
+{% load ipfjes %}
+{% script_text "Have you ever taken any heart medications such as amiodarone or flecainade, antibiotics such as nitrofurantoin, or immunosupressants and chemotherapy drugs such as, azathioprine, gefitinib, ifosfamide, melphalan, and rituximab?" %}
+
+<div class="row">
+  <div class="col-md-6">
+    <h3 class="col-md-12">Heart</h3>
+    {% radio  field="ScarringDrugs.amiodarone"  %}
+    {% radio  field="ScarringDrugs.flecainade"  %}
+    <h3 class="col-md-12">Antibiotics</h3>
+    {% radio  field="ScarringDrugs.nitrofurantoin"  %}
+  </div>
+  <div class="col-md-6">
+    <h3 class="col-md-12">Immunosupressants and Chemotherapy</h3>
+    {% radio  field="ScarringDrugs.azathioprine"  %}
+    {% radio  field="ScarringDrugs.gefitinib"  %}
+    {% radio  field="ScarringDrugs.ifosfamide"  %}
+    {% radio  field="ScarringDrugs.melphalan"  %}
+    {% radio  field="ScarringDrugs.rituximab"  %}
+  </div>
+</div>

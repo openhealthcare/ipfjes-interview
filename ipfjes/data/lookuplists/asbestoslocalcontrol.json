@@ -1,0 +1,32 @@
+{
+    "asbestoslocalcontrol":[
+        {
+            "name": "partial enclosure with ventilation",
+            "synonyms": []
+        },
+        {
+            "name": "partial enclosure without ventilation",
+            "synonyms": []
+        },
+        {
+            "name": "captor ventilation",
+            "synonyms": []
+        },
+        {
+            "name": "thorough wetting",
+            "synonyms": []
+        },
+        {
+            "name": "captor hoods",
+            "synonyms": []
+        },
+        {
+            "name": "water spray onto insulation",
+            "synonyms": []
+        },
+        {
+            "name": "no effective controls",
+            "synonyms": []
+        }
+    ]
+}

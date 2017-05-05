@@ -4,8 +4,11 @@
   <div class="col-md-12">
     {% script_text "Do you have any other serious illnesses?" %}
   </div>
+  <div class="col-md-12">
+    {% radio  model="editing.past_medical_history._client.working_cohabitors" lookuplist="['Yes', 'No']"%}
+  </div>
 </div>
-<div class="row">
+<div class="row" ng-show="editing.past_medical_history._client.working_cohabitors == 'Yes'">
   <div class="col-md-9">
     {% input  field="PastMedicalHistory.condition"  %}
   </div>

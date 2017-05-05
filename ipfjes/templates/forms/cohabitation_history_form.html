@@ -2,28 +2,37 @@
 {% load ipfjes %}
 <div class="row">
   <div class="col-md-4">
-
-    {% script_text "What was the name of the person?" %}
+    {% script_text "When you were growing up did anyone who went out to work live at home with you?" %}
   </div>
   <div class="col-md-8">
-    {% input  field="CohabitationHistory.nameofperson"  %}
+    {% radio  model="editing.cohabitation_history._client.working_cohabitors" lookuplist="['No', 'Yes']"%}
   </div>
 </div>
-<div class="row">
-  <div class="col-md-4">
+<div ng-show="editing.cohabitation_history._client.working_cohabitors == 'Yes'">
+  <div class="row">
+    <div class="col-md-4">
+      {% script_text "Who was that? (What relation were they to you?)" %}
+    </div>
+    <div class="col-md-8">
+      {% input  field="CohabitationHistory.nameofperson"  %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
 
-    {% script_text "How long for?" %}
+      {% script_text "How long did they live with you?" %}
+    </div>
+    <div class="col-md-8">
+      {% textarea  field="CohabitationHistory.howlong"  %}
+    </div>
   </div>
-  <div class="col-md-8">
-    {% textarea  field="CohabitationHistory.howlong"  %}
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    {% script_text "Do you remember what their job was?" %}
-  </div>
-  <div class="col-md-8">
+  <div class="row">
+    <div class="col-md-4">
+      {% script_text "Do you remember what their job was?" %}
+    </div>
+    <div class="col-md-8">
 
-    {% textarea  field="CohabitationHistory.occupation"  %}
+      {% textarea  field="CohabitationHistory.occupation"  %}
+    </div>
   </div>
 </div>

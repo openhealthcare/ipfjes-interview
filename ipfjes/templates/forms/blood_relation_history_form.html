@@ -2,20 +2,14 @@
 {% load ipfjes %}
 <div class="row">
   <div class="col-md-12">
-    {% script_text "Do you have any brothers or sisters? Are they well? How about your parents? How about your children?" %}
+    {% script_text "Does anyone in your family have scarring of their lungs (or pulmonary fibrosis)?" %}
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
+    {% radio  field="BloodRelationHistory.scarring"  %}
+  </div>
+  <div class="col-md-12" ng-show="editing.blood_relation_history.scarring == 'Yes'">
     {% input  field="BloodRelationHistory.relation"  %}
-  </div>
-  <div class="col-md-6">
-    {% input  field="BloodRelationHistory.age_at_diagnosis"  %}
-  </div>
-  <div class="col-md-6">
-    {% input  field="BloodRelationHistory.age_at_death"  %}
-  </div>
-  <div class="col-md-12">
-    {% input  field="BloodRelationHistory.diagnosis"  %}
   </div>
 </div>

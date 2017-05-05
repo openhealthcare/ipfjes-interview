@@ -40,11 +40,15 @@ class SocJob(lookuplists.LookupList): pass
 class WorkingAreaType(lookuplists.LookupList): pass
 class Smokables(lookuplists.LookupList): pass
 class Relationship(lookuplists.LookupList):pass
-class AsbestosMaterial(lookuplists.LookupList): pass
+class AsbestosLocalControl(lookuplists.LookupList): pass
 class AsbestosHandling(lookuplists.LookupList): pass
 class TaskLocation(lookuplists.LookupList): pass
 class Mask(lookuplists.LookupList): pass
 class Site(lookuplists.LookupList): pass
+class IPFJESEthnicity(lookuplists.LookupList):
+    class Meta:
+        verbose_name_plural = "IPFJES Ethnicities"
+
 
 class OccupationalHistory(models.PatientSubrecord):
     _title = "Occupational History"
@@ -75,7 +79,7 @@ class CohabitationHistory(models.PatientSubrecord):
     _title = "Cohabitation History"
     nameofperson = fields.CharField(
         max_length=250, blank=True, null=True,
-        verbose_name="Name of person"
+        verbose_name="Who was that"
     )
     relationship = fields.CharField(max_length=250, blank=True, null=True)
     howlong = fields.TextField(
@@ -109,7 +113,7 @@ class SmokingHistory(models.EpisodeSubrecord):
     smoking_notes = fields.TextField(blank=True, null=True)
 
 class Dyspnoea(models.EpisodeSubrecord):
-    _title = 'mMRC Dispnoea'
+    _title = 'mMRC Dyspnoea'
     _is_singleton = True
 
     breathless = fields.CharField(
@@ -134,10 +138,12 @@ class Dyspnoea(models.EpisodeSubrecord):
     )
 
 class BloodRelationHistory(models.EpisodeSubrecord):
+    scarring = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
     relation = models.ForeignKeyOrFreeText(Relationship)
-    diagnosis = models.ForeignKeyOrFreeText(models.Condition)
-    age_at_diagnosis = fields.IntegerField(blank=True, null=True)
-    age_at_death = fields.IntegerField(blank=True, null=True)
+
 
 class EverEncounteredAsbestos(models.EpisodeSubrecord):
     contact_with = fields.CharField(
@@ -145,21 +151,132 @@ class EverEncounteredAsbestos(models.EpisodeSubrecord):
         choices=YES_NO_CHOICES
     )
 
+class AsbestosExposureScreening(models.EpisodeSubrecord):
+    exposed = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    description = fields.TextField(blank=True, null=True)
+
+
 class AsbestosExposureHistory(models.EpisodeSubrecord):
     NEAR_FAR_CHOICES = (('Near', 'Near'), ('Far', 'Far'))
+    ASBESTOS_CHOICES = (
+        ('Amosite or crocidolite', 'Amosite or crocidolite'),
+        ('Chrysotile', 'Chrysotile')
+    )
+    PERCENTAGE_CHOICES = (
+        ('100%', '100%'),
+        ('20 - 40%', '20 - 40%'),
+        ('10 - 15%', '10 - 15%'),
+        ('1%', '1%')
+    )
+    ROOM_SIZE_CHOICES = (
+        ('30m', '30m'),
+        ('100m', '100m'),
+        ('300m', '300m'),
+        ('1000m', '1000m'),
+        ('3000m', '3000m'),
+    )
+    AIR_CHANGES_CHOICES = (
+        ('0.3', '0.3'),
+        ('1', '1'),
+        ('3', '3'),
+        ('10', '10'),
+    )
+    COMPLIANCE_CHOICES = (
+        ('good', 'good'),
+        ('bad', 'bad'),
+    )
+    PERIODICITY_CHOICES = (
+        ('day', 'day'),
+        ('week', 'week'),
+        ('month', 'month'),
+        ('year', 'year'),
+    )
+
+    related_occupation = django_models.ForeignKey(
+        OccupationalHistory, null=True, blank=True
+    )
+
     description = fields.TextField(blank=True, null=True)
-    asbestos_material = models.ForeignKeyOrFreeText(AsbestosMaterial)
+    asbestos_type = fields.CharField(
+        max_length="100", blank=True, null=True,
+        choices=ASBESTOS_CHOICES
+    )
+    asbestos_percentage = fields.CharField(
+        max_length="100", blank=True, null=True,
+        choices=PERCENTAGE_CHOICES
+    )
+    handling = models.ForeignKeyOrFreeText(AsbestosHandling)
+    local_controls = models.ForeignKeyOrFreeText(AsbestosLocalControl)
+
     near_or_far_field = fields.CharField(
         max_length=4, blank=True, null=True,
         choices=NEAR_FAR_CHOICES
     )
-    handling = models.ForeignKeyOrFreeText(AsbestosHandling)
-    related_occupation = django_models.ForeignKey(
-        OccupationalHistory, null=True, blank=True
+    room_air_changes = fields.CharField(
+        max_length=4, blank=True, null=True,
+        choices=AIR_CHANGES_CHOICES
     )
-    percent_task = fields.FloatField(blank=True, null=True)
-    task_location = models.ForeignKeyOrFreeText(TaskLocation)
+    room_volume = fields.CharField(
+        max_length=4, blank=True, null=True,
+        choices=ROOM_SIZE_CHOICES
+    )
+
     mask = models.ForeignKeyOrFreeText(Mask)
+    mask_compliance = fields.CharField(
+        max_length=4, blank=True, null=True,
+        choices=COMPLIANCE_CHOICES
+    )
+
+    task_duration = fields.IntegerField(blank=True, null=True)
+    task_frequency = fields.IntegerField(blank=True, null=True)
+    task_periodicity = fields.CharField(
+        max_length=4, blank=True, null=True,
+        choices=PERIODICITY_CHOICES
+    )
+
+
+
+class ScarringDrugs(models.EpisodeSubrecord):
+    _title = "Drug History"
+    _icon = 'fa fa-flask'
+    _is_singleton = True
+
+    amiodarone = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    flecainade = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    nitrofurantoin = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    azathioprine = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    gefitinib = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    ifosfamide = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    melphalan = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+    rituximab = fields.CharField(
+        max_length=3, blank=True, null=True,
+        choices=YES_NO_CHOICES
+    )
+
 
 class DiagnosisHistory(models.EpisodeSubrecord):
   #  initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")

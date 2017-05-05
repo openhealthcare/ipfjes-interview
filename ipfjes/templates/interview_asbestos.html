@@ -1,0 +1,20 @@
+{% load forms %}
+{% load ipfjes %}
+{% load pathways %}
+<div class="row">
+  <div class="col-md-12">
+    <p>
+      Did you, or anyone close to you, ever work with or disturb material you suspected to be made from asbestos?
+    </p>
+    <p>
+      This might include materials such as asbestos lagging, asbestos sprayed coatings, AIB(asbestos insulation board - e.g asbesolux, marinite, shipboard, LDR, turnasbestos etc) or corrugated roofing?
+    </p>
+  </div>
+  {% include models.AsbestosExposureScreening.get_form_template %}
+</div>
+
+
+<div ng-show="editing.asbestos_exposure_screening.exposed == 'Yes'">
+  <h3>Job Tasks </h3>
+  {% multisave models.AsbestosExposureHistory %}
+</div>

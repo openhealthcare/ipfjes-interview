@@ -1,0 +1,68 @@
+{
+    "asbestoshandling": [
+        {
+            "name": "lifting boards without damage",
+            "synonyms": []
+        },
+        {
+            "name": "painting boards",
+            "synonyms": []
+        },
+        {
+            "name": "wearing protective gloves or aprons",
+            "synonyms": []
+        },
+        {
+            "name": "unscrewing and carefully removing boards",
+            "synonyms": []
+        },
+        {
+            "name": "machine stitching quilts (yarn only)",
+            "synonyms": []
+        },
+        {
+            "name": "lifting loose fibre and bagging",
+            "synonyms": []
+        },
+        {
+            "name": "machine stitching quilts (cloth & yarn)",
+            "synonyms": []
+        },
+        {
+            "name": "braiding rope",
+            "synonyms": []
+        },
+        {
+            "name": "drilling",
+            "synonyms": []
+        },
+        {
+            "name": "breaking or ripping out ",
+            "synonyms": []
+        },
+        {
+            "name": "brushing dust or debris",
+            "synonyms": []
+        },
+        {
+            "name": "blowing dust with compressed air",
+            "synonyms": []
+        },
+        {
+            "name": "hand sawing boards",
+            "synonyms": []
+        },
+        {
+            "name": "delagging dry (manual scraping) *",
+            "synonyms": []
+        },
+        {
+            "name": "circular sawing boards",
+            "synonyms": []
+        },
+        {
+            "name": "delagging dry using power tools (grinders and grit blasting) *",
+            "synonyms": []
+        }
+    ]
+}

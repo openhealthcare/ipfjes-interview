@@ -1,0 +1,10 @@
+{% load forms %}
+{% load ipfjes %}
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "For the blood test that we have taken it would be helpful for us to know what ethnicity you are. To which of the following ethnic groups do you consider you belong?" %}
+  </div>
+  <div class="col-md-8">
+    {% select field="Demographics.ethnicity" lookuplist="ipfjesethnicity_list" %}
+  </div>
+</div>

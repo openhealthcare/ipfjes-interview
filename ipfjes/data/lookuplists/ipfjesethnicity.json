@@ -1,0 +1,32 @@
+{
+    "ipfjesethnicity": [
+        {
+            "name": "White",
+            "synonyms": []
+        },
+        {
+            "name": "Mixed / Multiple ethnic groups",
+            "synonyms": []
+        },
+        {
+            "name": "Asian / Asian British",
+            "synonyms": []
+        },
+        {
+            "name": "Black / African/ Caribbean/ Black British",
+            "synonyms": []
+        },
+        {
+            "name": "Chinese",
+            "synonyms": []
+        },
+        {
+            "name": "Arab",
+            "synonyms": []
+        },
+        {
+            "name": "Other ethnic group",
+            "synonyms": []
+        }
+    ]
+}

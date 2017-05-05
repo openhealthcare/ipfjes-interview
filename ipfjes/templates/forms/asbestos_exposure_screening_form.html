@@ -1,0 +1,16 @@
+{% load forms %}
+{% load ipfjes %}
+
+<div class="row">
+  <div class="col-md-12">
+    {% radio  field="AsbestosExposureScreening.exposed"  %}
+  </div>
+</div>
+<div class="row" ng-show="editing.asbestos_exposure_screening.exposed == 'Yes'">
+  <div class="col-md-4">
+    {% script_text "Tell me about your contact with asbestos" %}
+  </div>
+  <div class="col-md-8">
+    {% textarea field="AsbestosExposureScreening.description"  %}
+  </div>
+</div>
