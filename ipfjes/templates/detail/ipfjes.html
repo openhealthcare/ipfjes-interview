@@ -1,6 +1,6 @@
 {% load panels %}
 
-<div class="row"> 
+<div class="row">
     <div class="col-md-6 col-md-offset-4">
         <p class="text-center">
         <a href="/pathway/#/interview/[[patient.id]]/[[episode.id]]/" class="btn btn-primary btn-lg">
@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="row"> 
+<div class="row">
     <div class="col-md-6 col-md-offset-4">
         {% record_panel models.OccupationalHistory %}
         {% record_panel models.ResidentialHistory %}
@@ -18,9 +18,15 @@
         {% record_panel models.BirthPlace %}
         {% record_panel models.SmokingHistory %}
         {% record_panel models.Dyspnoea %}
-        {% record_panel models.Treatment %}
+        {% record_panel models.BloodRelationHistory %}
         {% record_panel models.PastMedicalHistory %}
+
+        {% record_panel models.AsbestosExposureScreening %}
+        {% record_panel models.AsbestosExposureHistory %}
+        {% record_panel models.ScarringDrugs %}
         {% record_panel models.DiagnosisHistory %}
+        {% record_panel models.StudyParticipantDetails %}
+        {% record_panel models.GeneralNotes %}
+
     </div>
 </div>
-

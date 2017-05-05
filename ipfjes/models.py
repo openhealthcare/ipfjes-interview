@@ -74,7 +74,6 @@ class ResidentialHistory(models.PatientSubrecord):
     start_year = fields.CharField(max_length=4, blank=True, null=True)
     end_year = fields.CharField(max_length=4, blank=True, null=True)
 
-
 class CohabitationHistory(models.PatientSubrecord):
     _title = "Cohabitation History"
     nameofperson = fields.CharField(
