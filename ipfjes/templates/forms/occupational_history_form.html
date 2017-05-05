@@ -1,4 +1,5 @@
 {% load forms %}
+{% load pathways %}
 {% load ipfjes %}
 
 <div ng-show="editing.occupational_history._client.editJob">
@@ -57,11 +58,35 @@
     {% textarea  field="OccupationalHistory.job_tasks"  %}
   </div>
 </div>
-<div ng-show="socCodes[editing.occupational_history.soc_job]">
-  <div ng-repeat="editing in [editing.occupational_history._client.aeh]">
-    {% include models.AsbestosExposureHistory.get_form_template %}
+
+<div class="row">
+  <div class="col-md-4">
+    <button class="btn btn-lg" ng-click="trigger(editing.occupational_history)">
+      Conduct Asbestos Exposure Assessment
+    </button>
   </div>
 </div>
+
+<div ng-show="socCodes[editing.occupational_history.soc_job]">
+
+  <div ng-repeat="occupation in [editing.occupational_history]">
+  <div ng-repeat="editing in editing.occupational_history._client.aeh">
+    <div save-multiple-wrapper="editing.asbestos_exposure_history">
+      <div ng-repeat="editing in model.subrecords">
+        {% include models.AsbestosExposureHistory.get_form_template %}
+        <button class="btn btn-default" ng-click="remove($index)">Remove</button>
+      </div>
+
+      <button class="btn btn-default"
+              ng-click="addAnotherAEH(occupation)">
+        Add another
+      </button>
+    </div>
+    </div>
+  </div>
+
+</div>
+
 <div class="row">
 
   <div class="col-md-4">
