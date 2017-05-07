@@ -14,7 +14,7 @@
 </div>
 
 
-<div ng-repeat="editing.asbestos_exposure_screening.exposed == 'Yes'">
+<div ng-show="editing.asbestos_exposure_screening.exposed == 'Yes'">
   <h3>Job Tasks </h3>
   {% multisave models.AsbestosExposureHistory %}
 </div>
