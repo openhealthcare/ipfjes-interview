@@ -72,7 +72,7 @@
   <div ng-repeat="occupation in [editing.occupational_history]">
     <div ng-repeat="editing in editing.occupational_history._client.aeh">
         {% include models.AsbestosExposureHistory.get_form_template %}
-        <button class="btn btn-default" ng-click="removeAEH(editing.occupational_history._client.aeh, $index)">Remove</button>
+        <button class="btn btn-default" ng-click="removeAEH(occupation, $index)">Remove</button>
     </div>
     <button class="btn btn-default"
             ng-click="addAnotherAEH(editing.occupational_history._client.aeh, editing.occupational_history)">

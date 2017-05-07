@@ -71,8 +71,8 @@ angular.module('opal.controllers').controller(
           asbestos_exposure_history.push(c);
         };
 
-        scope.removeAEH = function(asbestos_exposure_history, index){
-          asbestos_exposure_history.splice(index, 1);
+        scope.removeAEH = function(occupational_history, index){
+          occupational_history._client.aeh.splice(index, 1);
         };
 
 

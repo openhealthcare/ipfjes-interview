@@ -78,9 +78,13 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
                 if aeh.get("related_occupation_id", None) == occupational_history_id:
                     aeh["related_occupation_id"] = oh.id
 
-        models.AsbestosExposureHistory.bulk_update_from_dicts(
+        asbestos_exposure_histories = models.AsbestosExposureHistory.bulk_update_from_dicts(
             episode, asbestos_exposure_histories, user
         )
+
+        episode.asbestosexposurehistory_set.exclude(
+            id__in=[i.id for i in asbestos_exposure_histories]
+        ).delete()
 
         episode.set_tag_names([], user)
         return patient, episode
