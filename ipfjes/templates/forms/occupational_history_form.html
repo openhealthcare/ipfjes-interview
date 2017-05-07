@@ -70,19 +70,14 @@
 <div ng-show="socCodes[editing.occupational_history.soc_job]">
 
   <div ng-repeat="occupation in [editing.occupational_history]">
-  <div ng-repeat="editing in editing.occupational_history._client.aeh">
-    <div save-multiple-wrapper="editing.asbestos_exposure_history">
-      <div ng-repeat="editing in model.subrecords">
+    <div ng-repeat="editing in editing.occupational_history._client.aeh">
         {% include models.AsbestosExposureHistory.get_form_template %}
-        <button class="btn btn-default" ng-click="removeAEH(model.subrecords, $index)">Remove</button>
-      </div>
-
-      <button class="btn btn-default"
-              ng-click="addAnotherAEH(editing.asbestos_exposure_history)">
-        Add another
-      </button>
+        <button class="btn btn-default" ng-click="removeAEH(editing.occupational_history._client.aeh, $index)">Remove</button>
     </div>
-    </div>
+    <button class="btn btn-default"
+            ng-click="addAnotherAEH(editing.occupational_history._client.aeh, editing.occupational_history)">
+      Add another
+    </button>
   </div>
 
 </div>

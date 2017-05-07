@@ -62,8 +62,12 @@ angular.module('opal.controllers').controller(
             scope.editing.occupational_history.push({_client: c});
         };
 
-        scope.addAnotherAEH = function(asbestos_exposure_history){
-          var c = {_client: {completed: false, id: _.uniqueId("asbestos_exposure_history")}};
+        scope.addAnotherAEH = function(asbestos_exposure_history, oh){
+          var c = {asbestos_exposure_history: {
+            _client: {completed: false, id: _.uniqueId("asbestos_exposure_history")},
+            related_occupation_id: oh._client.id
+          }};
+
           asbestos_exposure_history.push(c);
         };
 
@@ -103,15 +107,15 @@ angular.module('opal.controllers').controller(
                             return aeh.related_occupation_id !== oh.id;
                         });
 
-
                         _.each(nestedAeh, function(aeh){
                             aeh.related_occupation_id = oh._client.id;
                         });
                     }
+                    oh._client.aeh = [];
 
-                    oh._client.aeh = {
-                        asbestos_exposure_history: nestedAeh
-                    };
+                    _.each(nestedAeh, function(aeh){
+                      oh._client.aeh.push({asbestos_exposure_history: aeh});
+                    });
                 });
             }
             // load in the code service
@@ -136,7 +140,9 @@ angular.module('opal.controllers').controller(
             _.each(editing.occupational_history, function(oh){
                 oh.occupational_history_client_id = oh._client.id;
                 if(scope.socCodes[oh.soc_job]){
-                    editing.asbestos_exposure_history.push(oh._client.aeh.asbestos_exposure_history);
+                  _.each(oh._client.aeh, function(aeh){
+                    editing.asbestos_exposure_history.push(aeh.asbestos_exposure_history);
+                  });
                 }
             });
         };
