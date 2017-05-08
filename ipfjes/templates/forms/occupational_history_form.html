@@ -41,12 +41,12 @@
 </div>
 <div ng-show="!editing.occupational_history._client.editJob" class="row">
   <div class="col-md-12">
-    <strong>Job Title: [[ editing.occupational_history.soc_job ]]
-      <a ng-click="switchToEditJob(editing.occupational_history._client)" class="btn btn-primary">
+    <h3>Job Title: [[ editing.occupational_history.soc_job ]]
+      <a ng-click="switchToEditJob(editing.occupational_history._client)" class="btn btn-primary pull-right">
         {% icon "fa-edit" %}
         Edit
       </a>
-    </strong>
+    </h3>
   </div>
 </div>
 
@@ -71,13 +71,28 @@
 <div ng-show="hasAEH(editing.occupational_history)">
   <div ng-repeat="occupation in [editing.occupational_history]">
     <div ng-repeat="editing in editing.occupational_history._client.aeh">
-        {% include models.AsbestosExposureHistory.get_form_template %}
-        <button class="btn btn-default" ng-click="removeAEH(occupation, $index)">Remove</button>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 well">
+          <h3>Task [[ $index + 1 ]]</h3>
+          {% include models.AsbestosExposureHistory.get_form_template %}
+          <button class="btn btn-danger" ng-click="removeAEH(occupation, $index)">
+            {% icon "fa-trash" %}
+            Remove
+          </button>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-default"
-            ng-click="addAnotherAEH(editing.occupational_history._client.aeh, editing.occupational_history)">
-      Add another
-    </button>
+    <div class="row">
+      <div class="col-md-12">
+        <center>
+          <button class="btn btn-primary"
+                  ng-click="addAnotherAEH(editing.occupational_history._client.aeh, editing.occupational_history)">
+            {% icon "fa-plus" %}
+            Add another Task
+          </button>
+        </center>
+      </div>
+    </div>
   </div>
 
 </div>

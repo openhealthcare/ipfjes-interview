@@ -111,7 +111,7 @@ class SmokingHistory(models.EpisodeSubrecord):
         ("Pipe", "Pipe",),
         ("Other", "Other",),
     )
-    smoking_type = fields.CharField(
+    what_do_you_smoke = fields.CharField(
        max_length=256, blank=True, null=True, choices=SMOKING_TYPE
     )
     smoking_type_other = fields.CharField(
@@ -120,7 +120,6 @@ class SmokingHistory(models.EpisodeSubrecord):
     start_smoking_age = fields.CharField(max_length=20, blank=True, null=True)
     stop_smoking_age = fields.CharField(max_length=20, blank=True, null=True)
     cigarettes_per_day = fields.CharField(max_length=20, blank=True, null=True)
-    what_do_you_smoke = models.ForeignKeyOrFreeText(Smokables)
     smoking_notes = fields.TextField(blank=True, null=True)
 
 class Dyspnoea(models.EpisodeSubrecord):
