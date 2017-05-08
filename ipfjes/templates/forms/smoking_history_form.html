@@ -7,6 +7,15 @@
 <div ng-hide="editing.smoking_history.ever_smoked != 'Yes' " >
   <div class="row">
     <div class="col-md-4">
+      {% script_text "What is your preferred method of smoking?" %}
+    </div>
+    <div class="col-md-8">
+      {% select field="SmokingHistory.smoking_type"  %}
+      {% input label="What was your preferred method?" field="SmokingHistory.smoking_type_other" show="editing.smoking_history.smoking_type === 'Other'" %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
       {% script_text "How old were you or when did you start smoking?" %}
     </div>
     <div class="col-md-8">

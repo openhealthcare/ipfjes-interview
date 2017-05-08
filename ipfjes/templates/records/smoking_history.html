@@ -1,9 +1,18 @@
-<span ng-show="item.ever_smoked">
-     Ever Smoked
+<span ng-show="item.ever_smoked && !item.current_smoker">
+     Ex-smoker
    <br />
 </span>
 <span ng-show="item.current_smoker">
      Current Smoker
+   <br />
+</span>
+<span ng-show="item.smoking_type">
+   <span ng-show="item.smoking_type !== 'Other'">
+     [[ item.smoking_type ]]
+   </span>
+   <span ng-show="item.smoking_type === 'Other'">
+     [[ item.smoking_type_other ]]
+   </span>
    <br />
 </span>
 <span ng-show="item.start_smoking_age">

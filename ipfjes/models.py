@@ -105,6 +105,18 @@ class SmokingHistory(models.EpisodeSubrecord):
         max_length=3, blank=True, null=True,
         choices=YES_NO_CHOICES
     )
+    SMOKING_TYPE = (
+        ("Cigarettes", "Cigarettes",),
+        ("Roll-ups", "Roll-ups",),
+        ("Pipe", "Pipe",),
+        ("Other", "Other",),
+    )
+    smoking_type = fields.CharField(
+       max_length=256, blank=True, null=True, choices=SMOKING_TYPE
+    )
+    smoking_type_other = fields.CharField(
+        max_length=256, blank=True, null=True
+    )
     start_smoking_age = fields.CharField(max_length=20, blank=True, null=True)
     stop_smoking_age = fields.CharField(max_length=20, blank=True, null=True)
     cigarettes_per_day = fields.CharField(max_length=20, blank=True, null=True)
