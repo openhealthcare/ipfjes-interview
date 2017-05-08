@@ -59,16 +59,16 @@
   </div>
 </div>
 
-<div class="row">
+<div ng-show="!hasAEH(editing.occupational_history)" class="row">
   <div class="col-md-4">
-    <button class="btn btn-lg" ng-click="trigger(editing.occupational_history)">
+    <button class="btn btn-lg btn-primary" ng-click="addAnotherAEH(editing.occupational_history._client.aeh, editing.occupational_history)">
+      {% icon models.AsbestosExposureHistory.get_icon %}
       Conduct Asbestos Exposure Assessment
     </button>
   </div>
 </div>
 
-<div ng-show="socCodes[editing.occupational_history.soc_job]">
-
+<div ng-show="hasAEH(editing.occupational_history)">
   <div ng-repeat="occupation in [editing.occupational_history]">
     <div ng-repeat="editing in editing.occupational_history._client.aeh">
         {% include models.AsbestosExposureHistory.get_form_template %}

@@ -13,7 +13,6 @@ angular.module('opal.controllers').controller(
                 aeh: [],
                 // the job matches for the lookup
                 matches: [],
-
                 // the job that has been selected but not confirmed
                 job: null
             };
@@ -25,6 +24,10 @@ angular.module('opal.controllers').controller(
             var existingClient = oh._client || {};
 
             return _.extend(clientDefaults, existingClient);
+        };
+
+        scope.hasAEH = function(oh){
+          return scope.socCodes[oh.title] || oh._client.aeh.length;
         };
 
         scope.select = function(job, client){
@@ -43,6 +46,7 @@ angular.module('opal.controllers').controller(
             oh.soc_job = oh._client.job || oh._client.soc_job_filter;
             oh._client.soc_job_filter = null;
             oh._client.editJob = false;
+            oh._client.aeh = [];
         };
 
         scope.get_soc_details = function(client){
@@ -139,7 +143,7 @@ angular.module('opal.controllers').controller(
         scope.preSave = function(editing){
             _.each(editing.occupational_history, function(oh){
                 oh.occupational_history_client_id = oh._client.id;
-                if(scope.socCodes[oh.soc_job]){
+                if(scope.hasAEH(oh)){
                   _.each(oh._client.aeh, function(aeh){
                     editing.asbestos_exposure_history.push(aeh.asbestos_exposure_history);
                   });

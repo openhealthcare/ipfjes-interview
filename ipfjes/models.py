@@ -160,6 +160,7 @@ class AsbestosExposureScreening(models.EpisodeSubrecord):
 
 
 class AsbestosExposureHistory(models.EpisodeSubrecord):
+    _icon = "fa fa-bullseye"
     NEAR_FAR_CHOICES = (('Near', 'Near'), ('Far', 'Far'))
     ASBESTOS_CHOICES = (
         ('Amosite or crocidolite', 'Amosite or crocidolite'),
