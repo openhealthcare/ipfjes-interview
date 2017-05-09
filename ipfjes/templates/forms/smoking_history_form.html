@@ -48,7 +48,7 @@
       {% script_text "What [[ editing.smoking_history.current_smoker == 'Yes' ? 'do you' : 'did you';]] smoke?" %}
     </div>
     <div class="col-md-8">
-      {% input  field="SmokingHistory.what_do_you_smoke"  %}
-    </div>
+      {% select field="SmokingHistory.what_do_you_smoke"  %}
+      {% input label="Smoking Other" field="SmokingHistory.smoking_type_other" show="editing.smoking_history.what_do_you_smoke === 'Other'" %}    </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 from pathway import pathways, steps
 from ipfjes import models
+from django.db import transaction
 
 
 class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
@@ -39,9 +40,10 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         models.ScarringDrugs,
         models.PastMedicalHistory,
         models.BloodRelationHistory,
-        steps.Step(
+        steps.MultiModelStep(
             template='interview_asbestos.html',
-            display_name='Asbestos Exposure History'
+            display_name='Asbestos Exposure History',
+            model=models.AsbestosExposureHistory,
         ),
         steps.Step(
             model=models.DiagnosisHistory,
@@ -55,6 +57,7 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         models.StudyParticipantDetails,
     )
 
+    @transaction.atomic
     def save(self, data, user):
         asbestos_exposure_histories = data.pop(
             "asbestos_exposure_history", []
@@ -75,9 +78,13 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
                 if aeh.get("related_occupation_id", None) == occupational_history_id:
                     aeh["related_occupation_id"] = oh.id
 
-        models.AsbestosExposureHistory.bulk_update_from_dicts(
+        asbestos_exposure_histories = models.AsbestosExposureHistory.bulk_update_from_dicts(
             episode, asbestos_exposure_histories, user
         )
 
-        episode.set_tag_names(["needs_interview"], user)
+        episode.asbestosexposurehistory_set.exclude(
+            id__in=[i.id for i in asbestos_exposure_histories]
+        ).delete()
+
+        episode.set_tag_names([], user)
         return patient, episode
