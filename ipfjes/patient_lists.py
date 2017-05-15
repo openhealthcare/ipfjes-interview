@@ -7,9 +7,9 @@ from opal.models import Episode
 from ipfjes import models
 
 
-class AllPatientsList(core.patient_lists.CardPatientList):
+class AllPatientsList(core.patient_lists.PatientList):
     display_name = 'All Patients'
-    card_footer_template = None
+    template_name = "ipfjes_card_list.html"
 
     schema = [
         models.Demographics,
@@ -21,11 +21,10 @@ class AllPatientsList(core.patient_lists.CardPatientList):
         return Episode.objects.all()
 
 
-class ParticipantsToCallList(core.patient_lists.CardPatientList):
+class ParticipantsToCallList(core.patient_lists.PatientList):
     display_name = 'Participants to call'
     slug = "interviews"
-    card_link = "/pathway/#/interview/[[row.demographics[0].patient_id]]/[[row.id]]/"
-    card_footer_template = None
+    template_name = "ipfjes_card_list.html"
 
     schema = [
         models.Demographics,
