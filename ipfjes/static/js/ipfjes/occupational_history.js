@@ -26,10 +26,6 @@ angular.module('opal.controllers').controller(
             return _.extend(clientDefaults, existingClient);
         };
 
-        scope.hasAEH = function(oh){
-          return scope.socCodes[oh.title] || oh._client.aeh.length;
-        };
-
         scope.select = function(job, client){
             client.job = job;
         };
@@ -42,11 +38,23 @@ angular.module('opal.controllers').controller(
             }
         };
 
+        scope.hasAEH = function(oh){
+          return oh._client.aeh.length;
+        };
+
         scope.confirm = function(oh){
+            _.each(oh, function(v, k){
+              if(k !== "_client"){
+                oh[k] = undefined;
+              }
+            });
+            oh._client.aeh = [];
             oh.soc_job = oh._client.job || oh._client.soc_job_filter;
+            if(scope.socCodes[oh.soc_job]){
+              scope.addAnotherAEH(oh._client.aeh, oh);
+            }
             oh._client.soc_job_filter = null;
             oh._client.editJob = false;
-            oh._client.aeh = [];
         };
 
         scope.get_soc_details = function(client){
