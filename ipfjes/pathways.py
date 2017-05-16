@@ -44,6 +44,7 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             template='interview_asbestos.html',
             display_name='Asbestos Exposure History',
             model=models.AsbestosExposureHistory,
+            delete_others=False
         ),
         steps.Step(
             model=models.DiagnosisHistory,
@@ -66,6 +67,7 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         occupational_history_ids = [
             i.pop("occupational_history_client_id", None) for i in occupational_histories
         ]
+
         patient, episode = super(Interview, self).save(data, user)
 
         ohs = models.OccupationalHistory.bulk_update_from_dicts(
@@ -84,6 +86,11 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
 
         episode.asbestosexposurehistory_set.exclude(
             id__in=[i.id for i in asbestos_exposure_histories]
+        ).delete()
+
+        # # delete others for occupational history
+        patient.occupationalhistory_set.exclude(
+            id__in=[i.id for i in ohs]
         ).delete()
 
         episode.set_tag_names([], user)
