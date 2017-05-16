@@ -1,2 +1,16 @@
 {% extends "patient_lists/card_list.html" %}
 {% block card_link %}/pathway/#/interview/[[row.demographics[0].patient_id]]/[[row.id]]/{% endblock %}
+{% block card_footer %}
+  <div class="panel-footer">
+    <div class="row">
+      <div class="text-right col-md-12">
+        <a ng-click="editNamedItem(row, 'demographics', row.demographics.length)" class="btn btn-primary">
+          Edit {{ models.Demographics.get_display_name }}
+        </a>
+        <a ng-click="newNamedItem(row, 'general_notes')" class="btn btn-primary">
+          Add {{ models.GeneralNotes.get_display_name }}
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
