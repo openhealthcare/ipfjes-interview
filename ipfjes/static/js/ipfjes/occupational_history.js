@@ -7,14 +7,26 @@ angular.module('opal.controllers').controller(
             if(!oh){
                 oh = {};
             }
+            var client_id = _.uniqueId("occupational_history");
             var clientDefaults = {
                 // the id used in the name
-                id: _.uniqueId("occupational_history"),
+                id: client_id,
+                // the list of asbestos exposure histories
                 aeh: [],
-                // the job matches for the lookup
+                // the asbestos screening, only used if they have asbestos exposure history
+                aes: {
+                  asbestos_exposure_screening: {
+                    _client: {
+                      id: _.uniqueId("asbestos_screening"),
+                    }
+                  }
+                },
+                // the job matches for the s
                 matches: [],
                 // the job that has been selected but not confirmed
-                job: null
+                job: null,
+                // if they have clicked conduct asbestos assessment
+                hasAesbestosRisk: false
             };
 
             // whether we're in the edit mode for the job
@@ -23,7 +35,9 @@ angular.module('opal.controllers').controller(
 
             var existingClient = oh._client || {};
 
-            return _.extend(clientDefaults, existingClient);
+            var result = _.extend(clientDefaults, existingClient);
+            result.aes.asbestos_exposure_screening.related_occupation_id = result.id;
+            return result;
         };
 
         scope.select = function(job, client){
@@ -39,7 +53,7 @@ angular.module('opal.controllers').controller(
         };
 
         scope.hasAEH = function(oh){
-          return oh._client.aeh.length;
+          return oh._client.hasAesbestosRisk;
         };
 
         scope.confirm = function(oh){
@@ -74,7 +88,19 @@ angular.module('opal.controllers').controller(
             scope.editing.occupational_history.push({_client: c});
         };
 
+        scope.cancelAesbestosRisk = function(oh){
+          oh._client.hasAesbestosRisk = false;
+          oh._client.aeh = [];
+          oh._client.aes = {
+            asbestos_exposure_screening: {
+              _client: _.uniqueId("asbestos_screening"),
+              related_occupation_id: oh._client.id
+            }
+          };
+        };
+
         scope.addAnotherAEH = function(asbestos_exposure_history, oh){
+          oh._client.hasAesbestosRisk = true;
           var c = {asbestos_exposure_history: {
             _client: {completed: false, id: _.uniqueId("asbestos_exposure_history")},
             related_occupation_id: oh._client.id
@@ -122,12 +148,24 @@ angular.module('opal.controllers').controller(
                         _.each(nestedAeh, function(aeh){
                             aeh.related_occupation_id = oh._client.id;
                         });
-                    }
-                    oh._client.aeh = [];
 
-                    _.each(nestedAeh, function(aeh){
-                      oh._client.aeh.push({asbestos_exposure_history: aeh});
-                    });
+                        _.each(nestedAeh, function(aeh){
+                          oh._client.aeh.push({asbestos_exposure_history: aeh});
+                        });
+
+                        var nestedAes = _.where(scope.editing.asbestos_exposure_screening, {related_occupation_id: oh.id});
+                        if(nestedAes.length){
+                          oh._client.aes.asbestos_exposure_screening = nestedAes[0];
+                          scope.editing.asbestos_exposure_screening = _.filter(scope.editing.asbestos_exposure_screening, function(aes){
+                              return aes.related_occupation_id !== oh.id;
+                          });
+                          oh._client.aes.asbestos_exposure_screening.related_occupation_id = oh._client.id;
+                        }
+
+                        if(nestedAeh.length | oh._client.aes.asbestos_exposure_screening.id){
+                          oh._client.hasAesbestosRisk = true;
+                        }
+                    }
                 });
             }
             // load in the code service
@@ -155,6 +193,17 @@ angular.module('opal.controllers').controller(
                   _.each(oh._client.aeh, function(aeh){
                     editing.asbestos_exposure_history.push(aeh.asbestos_exposure_history);
                   });
+                  if(!editing.asbestos_exposure_screening){
+                    editing.asbestos_exposure_screening = [];
+                  }
+                  else if(!_.isArray(editing.asbestos_exposure_screening)){
+                    editing.asbestos_exposure_screening = [
+                      editing.asbestos_exposure_screening
+                    ];
+                  }
+                  editing.asbestos_exposure_screening.push(
+                    oh._client.aes.asbestos_exposure_screening
+                  );
                 }
             });
         };
