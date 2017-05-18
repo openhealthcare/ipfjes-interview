@@ -155,14 +155,18 @@ class BloodRelationHistory(models.EpisodeSubrecord):
     relation = models.ForeignKeyOrFreeText(Relationship)
 
 
-    # TODO: Delete this?
+# TODO: Delete this?
 class EverEncounteredAsbestos(models.EpisodeSubrecord):
     contact_with = fields.CharField(
         max_length=3, blank=True, null=True,
         choices=YES_NO_CHOICES
     )
 
+
 class AsbestosExposureScreening(models.EpisodeSubrecord):
+    related_occupation = django_models.ForeignKey(
+        OccupationalHistory, null=True, blank=True
+    )
     exposed = fields.CharField(
         max_length=3, blank=True, null=True,
         choices=YES_NO_CHOICES

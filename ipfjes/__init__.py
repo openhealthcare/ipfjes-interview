@@ -7,9 +7,10 @@ from opal.core import application, menus
 
 class Application(application.OpalApplication):
 
-    javascripts   = [
+    javascripts = [
         'js/ipfjes/routes.js',
         'js/ipfjes/occupational_history.js',
+        'js/ipfjes/asbestos_exposure_history.js',
         'js/opal/controllers/discharge.js',
         'js/ipfjes/soc_code.js',
         # Uncomment this if you want to implement custom dynamic flows.
