@@ -44,6 +44,8 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             template='interview_asbestos.html',
             display_name='Asbestos Exposure History',
             model=models.AsbestosExposureHistory,
+            step_controller="AsbestosExposureHistoryCtrl",
+            delete_others=False
         ),
         steps.Step(
             model=models.DiagnosisHistory,
@@ -62,10 +64,14 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         asbestos_exposure_histories = data.pop(
             "asbestos_exposure_history", []
         )
+        asbestos_exposure_screening = data.pop(
+            "asbestos_exposure_screening", []
+        )
         occupational_histories = data.pop("occupational_history", [])
         occupational_history_ids = [
             i.pop("occupational_history_client_id", None) for i in occupational_histories
         ]
+
         patient, episode = super(Interview, self).save(data, user)
 
         ohs = models.OccupationalHistory.bulk_update_from_dicts(
@@ -77,6 +83,9 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             for aeh in asbestos_exposure_histories:
                 if aeh.get("related_occupation_id", None) == occupational_history_id:
                     aeh["related_occupation_id"] = oh.id
+            for aes in asbestos_exposure_screening:
+                if aes.get("related_occupation_id", None) == occupational_history_id:
+                    aes["related_occupation_id"] = oh.id
 
         asbestos_exposure_histories = models.AsbestosExposureHistory.bulk_update_from_dicts(
             episode, asbestos_exposure_histories, user
@@ -84,6 +93,19 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
 
         episode.asbestosexposurehistory_set.exclude(
             id__in=[i.id for i in asbestos_exposure_histories]
+        ).delete()
+
+        asbestos_exposure_screening = models.AsbestosExposureScreening.bulk_update_from_dicts(
+            episode, asbestos_exposure_screening, user
+        )
+
+        episode.asbestosexposurescreening_set.exclude(
+            id__in=[i.id for i in asbestos_exposure_screening]
+        ).delete()
+
+        # # delete others for occupational history
+        patient.occupationalhistory_set.exclude(
+            id__in=[i.id for i in ohs]
         ).delete()
 
         episode.set_tag_names([], user)
