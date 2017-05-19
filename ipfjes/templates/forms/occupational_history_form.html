@@ -88,27 +88,29 @@
         </div>
       </div>
     </div>
-    <div ng-repeat="editing in occupation._client.aeh">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1 well">
-          <h3>Task [[ $index + 1 ]]</h3>
-          {% include models.AsbestosExposureHistory.get_form_template %}
-          <button class="btn btn-danger" ng-click="removeAEH(occupation, $index)">
-            {% icon "fa-trash" %}
-            Remove
-          </button>
+    <div ng-show="occupation._client.aes.asbestos_exposure_screening.exposed == 'Yes'">
+      <div ng-repeat="editing in occupation._client.aeh">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1 well">
+            <h3>Task [[ $index + 1 ]]</h3>
+            {% include models.AsbestosExposureHistory.get_form_template %}
+            <button class="btn btn-danger" ng-click="removeAEH(occupation, $index)">
+              {% icon "fa-trash" %}
+              Remove
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <center>
-          <button class="btn btn-primary"
-                  ng-click="addAnotherAEH(editing.occupational_history._client.aeh, editing.occupational_history)">
-            {% icon "fa-plus" %}
-            Add another Task
-          </button>
-        </center>
+      <div class="row">
+        <div class="col-md-12">
+          <center>
+            <button class="btn btn-primary"
+                    ng-click="addAnotherAEH(editing.occupational_history._client.aeh, editing.occupational_history)">
+              {% icon "fa-plus" %}
+              Add another Task
+            </button>
+          </center>
+        </div>
       </div>
     </div>
   </div>
