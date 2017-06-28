@@ -58,7 +58,7 @@ angular.module('opal.controllers').controller(
 
         scope.confirm = function(oh){
             _.each(oh, function(v, k){
-              if(k !== "_client"){
+              if(k !== "_client" && k !== 'end_year' && k !== 'start_year'){
                 oh[k] = undefined;
               }
             });
