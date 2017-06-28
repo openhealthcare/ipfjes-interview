@@ -12,8 +12,8 @@ class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             models.Demographics
             )
 
-    def save(self, data, user):
-        patient, episode = super(AddParticipant, self).save(data, user)
+    def save(self, data, user=None, patient=None, episode=None):
+        patient, episode = super(AddParticipant, self).save(data, user=user, patient=patient, episode=episode)
         episode.set_tag_names(["needs_interview"], user)
         return patient, episode
 
@@ -30,10 +30,6 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             model=models.OccupationalHistory,
             template="interview_occupational_history.html",
             step_controller="OccupationalHistoryCtrl"
-        ),
-        steps.Step(
-            display_name="Residential History",
-            template='interview_residential_history.html'
         ),
         models.SmokingHistory,
         models.Dyspnoea,
@@ -60,7 +56,7 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     )
 
     @transaction.atomic
-    def save(self, data, user):
+    def save(self, data,user=None, patient=None, episode=None):
         asbestos_exposure_histories = data.pop(
             "asbestos_exposure_history", []
         )
@@ -72,7 +68,7 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             i.pop("occupational_history_client_id", None) for i in occupational_histories
         ]
 
-        patient, episode = super(Interview, self).save(data, user)
+        patient, episode = super(Interview, self).save(data, user=user, patient=patient, episode=episode)
 
         ohs = models.OccupationalHistory.bulk_update_from_dicts(
             patient, occupational_histories, user
