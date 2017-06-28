@@ -31,6 +31,10 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             template="interview_occupational_history.html",
             step_controller="OccupationalHistoryCtrl"
         ),
+        steps.Step(
+            model=models.CohabitationHistory,
+            template='interview_cohabitation_history.html'
+        ),
         models.SmokingHistory,
         models.Dyspnoea,
         models.ScarringDrugs,
