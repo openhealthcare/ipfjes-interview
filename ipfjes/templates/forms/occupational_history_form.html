@@ -39,6 +39,22 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "Do you remember how old you were or what year you started the job?" %}
+  </div>
+  <div class="col-md-8">
+    {% input  field="OccupationalHistory.start_year"  %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    {% script_text "Do you remember how old you were or what year you finished the job?" %}
+  </div>
+  <div class="col-md-8">
+    {% input  field="OccupationalHistory.end_year"  %}
+  </div>
+</div>
 <div ng-show="!editing.occupational_history._client.editJob" class="row">
   <div class="col-md-12">
     <h3>Job Title: [[ editing.occupational_history.soc_job ]]
@@ -177,24 +193,7 @@
     </div>
   </div>
 </div>
-<div class="row">
 
-  <div class="col-md-4">
-    {% script_text "Do you remember how old you were or what year you started the job?" %}
-  </div>
-  <div class="col-md-8">
-    {% input  field="OccupationalHistory.start_year"  %}
-  </div>
-</div>
-<div class="row">
-
-  <div class="col-md-4">
-    {% script_text "Do you remember how old you were or what year you finished the job?" %}
-  </div>
-  <div class="col-md-8">
-    {% input  field="OccupationalHistory.end_year"  %}
-  </div>
-</div>
 <div class="row">
   <div class="col-md-12">
     {% script_text "Do you remember what job you had next?" %}
