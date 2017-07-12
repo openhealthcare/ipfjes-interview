@@ -8,6 +8,7 @@ from ipfjes import models
 
 class AllPatientsList(core.patient_lists.PatientList):
     display_name = 'All Patients'
+    template_name = "patient_lists/ipfjes_list.html"
 
     schema = [
         models.Demographics,
@@ -21,6 +22,7 @@ class AllPatientsList(core.patient_lists.PatientList):
 class ParticipantsToCallList(core.patient_lists.PatientList):
     display_name = 'Participants to call'
     slug = "interviews"
+    template_name = "patient_lists/ipfjes_list.html"
 
     schema = [
         models.Demographics,
