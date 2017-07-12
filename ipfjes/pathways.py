@@ -1,4 +1,4 @@
-from pathway import pathways, steps
+from opal.core.pathway import pathways, steps
 from ipfjes import models
 from django.db import transaction
 
@@ -7,10 +7,12 @@ class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Add new participant"
     slug = "new"
     steps = (
-            steps.Step(model=models.StudyParticipantDetails,
-                       template="add_participant_details.html"),
-            models.Demographics
-            )
+        steps.Step(
+            model=models.StudyParticipantDetails,
+            template="add_participant_details.html"
+        ),
+        models.Demographics
+    )
 
     def save(self, data, user=None, patient=None, episode=None):
         patient, episode = super(AddParticipant, self).save(data, user=user, patient=patient, episode=episode)
