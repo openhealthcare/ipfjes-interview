@@ -228,7 +228,7 @@ COVERAGE_EXCLUDE_MODULES = ('ipfjes.migrations', 'ipfjes.tests',
 
 # Begins OPAL Settings
 
-OPAL_LOG_OUT_MINUTES = 15
+OPAL_LOG_OUT_MINUTES = 150000
 OPAL_LOG_OUT_DURATION = OPAL_LOG_OUT_MINUTES*60*1000
 
 # Begins OPAL optional settings
