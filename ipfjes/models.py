@@ -249,7 +249,7 @@ class AsbestosExposureHistory(models.EpisodeSubrecord):
     task_duration = fields.IntegerField(blank=True, null=True)
     task_frequency = fields.IntegerField(blank=True, null=True)
     task_periodicity = fields.CharField(
-        max_length=4, blank=True, null=True,
+        max_length=5, blank=True, null=True,
         choices=PERIODICITY_CHOICES
     )
 
