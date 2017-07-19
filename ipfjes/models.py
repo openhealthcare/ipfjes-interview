@@ -217,11 +217,11 @@ class AsbestosExposureHistory(models.EpisodeSubrecord):
 
     description = fields.TextField(blank=True, null=True)
     asbestos_type = fields.CharField(
-        max_length="100", blank=True, null=True,
+        max_length=100, blank=True, null=True,
         choices=ASBESTOS_CHOICES
     )
     asbestos_percentage = fields.CharField(
-        max_length="100", blank=True, null=True,
+        max_length=100, blank=True, null=True,
         choices=PERCENTAGE_CHOICES
     )
     handling = models.ForeignKeyOrFreeText(AsbestosHandling)
@@ -236,7 +236,7 @@ class AsbestosExposureHistory(models.EpisodeSubrecord):
         choices=AIR_CHANGES_CHOICES
     )
     room_volume = fields.CharField(
-        max_length=4, blank=True, null=True,
+        max_length=5, blank=True, null=True,
         choices=ROOM_SIZE_CHOICES
     )
 
