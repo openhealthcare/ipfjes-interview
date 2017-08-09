@@ -29,7 +29,8 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         steps.Step(
             model=models.OccupationalHistory,
             template="interview_occupational_history.html",
-            step_controller="OccupationalHistoryCtrl"
+            step_controller="OccupationalHistoryCtrl",
+            delete_others=False
         ),
         steps.Step(
             model=models.CohabitationHistory,
@@ -60,7 +61,7 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     )
 
     @transaction.atomic
-    def save(self, data,user=None, patient=None, episode=None):
+    def save(self, data, user=None, patient=None, episode=None):
         asbestos_exposure_histories = data.pop(
             "asbestos_exposure_history", []
         )
@@ -73,7 +74,6 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
         ]
 
         patient, episode = super(Interview, self).save(data, user=user, patient=patient, episode=episode)
-
         ohs = models.OccupationalHistory.bulk_update_from_dicts(
             patient, occupational_histories, user
         )
