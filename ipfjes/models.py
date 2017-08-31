@@ -74,6 +74,7 @@ class ResidentialHistory(models.PatientSubrecord):
     start_year = fields.CharField(max_length=4, blank=True, null=True)
     end_year = fields.CharField(max_length=4, blank=True, null=True)
 
+
 class CohabitationHistory(models.PatientSubrecord):
     _title = "Cohabitation History"
     nameofperson = fields.CharField(
@@ -87,11 +88,13 @@ class CohabitationHistory(models.PatientSubrecord):
     )
     occupation = fields.TextField(blank=True, null=True)
 
+
 class BirthPlace(models.PatientSubrecord):
     _title = "Birth Place"
     _is_singleton = True
     countryofbirth = models.ForeignKeyOrFreeText(models.Destination, verbose_name="Country of birth")
     place = fields.TextField(blank=True, null=True)
+
 
 class SmokingHistory(models.EpisodeSubrecord):
     _title = 'Smoking History'
@@ -122,6 +125,7 @@ class SmokingHistory(models.EpisodeSubrecord):
     cigarettes_per_day = fields.CharField(max_length=20, blank=True, null=True)
     smoking_notes = fields.TextField(blank=True, null=True)
 
+
 class Dyspnoea(models.EpisodeSubrecord):
     _title = 'mMRC Dyspnoea'
     _is_singleton = True
@@ -146,6 +150,7 @@ class Dyspnoea(models.EpisodeSubrecord):
         max_length=3, blank=True, null=True,
         choices=YES_NO_CHOICES
     )
+
 
 class BloodRelationHistory(models.EpisodeSubrecord):
     scarring = fields.CharField(
@@ -342,3 +347,42 @@ class StudyParticipantDetails(models.EpisodeSubrecord):
     email_address = fields.CharField(max_length=200, blank=True, null=True)
     postal_address = fields.TextField()
     comments = fields.TextField()
+
+
+class Radiology(models.EpisodeSubrecord):
+    _is_singleton = True
+    OTHER = 'other'
+
+    CT_FINDINGS = (
+        ('no CT', 'no CT',),
+        ('definite UIP', 'definite UIP',),
+        ('possible UIP', 'possible UIP',),
+        (OTHER, OTHER,),
+    )
+
+    BIOPSY_FINDINGS = (
+        ('no Biopsy', 'no Biopsy',),
+        ('definite UIP', 'definite UIP',),
+        ('possible UIP', 'possible UIP',),
+        (OTHER, OTHER,),
+    )
+
+    ct_findings = fields.CharField(
+        max_length=12, choices=CT_FINDINGS, null=True, blank=True
+    )
+
+    ct_findings_other = fields.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Other CT Findings Description"
+    )
+
+    biopsy_findings = fields.CharField(
+        max_length=12, choices=BIOPSY_FINDINGS, null=True, blank=True
+    )
+
+    biopsy_findings_other = fields.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Other Biopsy Findings Description"
+    )
