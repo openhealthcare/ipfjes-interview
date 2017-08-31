@@ -1,4 +1,15 @@
-<span ng-show="item.initial_consult_reason">
-    [[ item.initial_consult_reason ]]
-   <br />
+<span ng-show="item.cough === 'Yes'">
+  Cough<span ng-show="item.breathlessness === 'Yes' || item.incidental === 'Yes'">, </span>
+</span>
+<span ng-show="item.breathlessness === 'Yes'">
+  Breathlessness<span ng-show="item.incidental === 'Yes'">, </span>
+</span>
+<span ng-show="item.incidental === 'Yes'">Incidental</span>
+<span ng-show="item.incidental_desc">
+  <br />
+  [[ item.incidental_desc ]]
+</span>
+<span ng-show="item.other">
+  <br />
+  [[ item.other ]]
 </span>
