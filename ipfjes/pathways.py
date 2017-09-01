@@ -10,7 +10,7 @@ class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
             steps.Step(model=models.StudyParticipantDetails,
                        template="add_participant_details.html"),
             models.Demographics,
-            models.Radiology,
+            models.CtAndBiopsy,
             )
 
     def save(self, data, user=None, patient=None, episode=None):

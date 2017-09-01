@@ -349,8 +349,9 @@ class StudyParticipantDetails(models.EpisodeSubrecord):
     comments = fields.TextField()
 
 
-class Radiology(models.EpisodeSubrecord):
+class CtAndBiopsy(models.EpisodeSubrecord):
     _is_singleton = True
+    _title = "CT and Biopsy"
     OTHER = 'other'
 
     CT_FINDINGS = (

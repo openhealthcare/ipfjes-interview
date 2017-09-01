@@ -1,0 +1,10 @@
+{% load forms %}
+{% radio field="CtAndBiopsy.ct_findings"  %}
+<div ng-show="editing.{{ models.CtAndBiopsy.get_api_name }}.ct_findings === '{{ models.CtAndBiopsy.OTHER }}'">
+  {% textarea field="CtAndBiopsy.ct_findings_other" label="Please Describe" %}
+</div>
+
+{% radio field="CtAndBiopsy.biopsy_findings"  %}
+<div ng-show="editing.{{ models.CtAndBiopsy.get_api_name }}.biopsy_findings === '{{ models.CtAndBiopsy.OTHER }}'">
+  {% textarea field="CtAndBiopsy.biopsy_findings_other" label="Please Describe" %}
+</div>
