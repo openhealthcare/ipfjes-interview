@@ -351,7 +351,7 @@ class StudyParticipantDetails(models.EpisodeSubrecord):
 
 class CtAndBiopsy(models.EpisodeSubrecord):
     _is_singleton = True
-    _title = "CT and Biopsy"
+    _title = "CT and Biopsy Findings"
     OTHER = 'other'
 
     CT_FINDINGS = (
