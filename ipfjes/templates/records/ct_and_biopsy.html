@@ -1,0 +1,16 @@
+<span ng-show="item.ct_findings !== '{{ models.CtAndBiopsy.OTHER }}'">
+    [[ item.ct_findings ]]
+   <br />
+</span>
+<span ng-show="item.ct_findings === '{{ models.CtAndBiopsy.OTHER }}'">
+    [[ item.ct_findings_other ]]
+   <br />
+</span>
+<span ng-show="item.biopsy_findings !== '{{ models.CtAndBiopsy.OTHER }}'">
+    [[ item.biopsy_findings ]]
+   <br />
+</span>
+<span ng-show="item.biopsy_findings === '{{ models.CtAndBiopsy.OTHER }}'">
+    [[ item.biopsy_findings_other ]]
+   <br />
+</span>
