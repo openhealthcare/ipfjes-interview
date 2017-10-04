@@ -300,7 +300,7 @@ class ScarringDrugs(models.EpisodeSubrecord):
 
 
 class DiagnosisHistory(models.EpisodeSubrecord):
-  #  initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")
+    #  initial_consult_reason = fields.TextField(blank=True, null=True, verbose_name="What took you to the doctor at the beginning of the illness?")
     _is_singleton = True
     cough = fields.CharField(
         max_length=3, blank=True, null=True,
@@ -332,15 +332,20 @@ class SocCode(models.models.Model):
 class GeneralNotes(models.EpisodeSubrecord):
     _title = "General Notes"
     _icon = "fa fa-info-circle"
-    note = fields.TextField(blank=True, null=True, verbose_name="General notes")
+    note = fields.TextField(
+        blank=True, null=True, verbose_name="General notes"
+    )
+
 
 class StudyParticipantDetails(models.EpisodeSubrecord):
     _is_singleton = True
 
     PARTICIPANT_TYPE = (("case", "case"), ("control", "control"))
     site = models.ForeignKeyOrFreeText(Site)
-    participant_type = fields.CharField(max_length=12, choices=PARTICIPANT_TYPE, null=True, blank=True)
-    want_updates =  fields.CharField(
+    participant_type = fields.CharField(
+        max_length=12, choices=PARTICIPANT_TYPE, null=True, blank=True
+    )
+    want_updates = fields.CharField(
         max_length=3, blank=True, null=True,
         choices=YES_NO_CHOICES
     )
