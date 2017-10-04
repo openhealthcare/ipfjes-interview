@@ -7,14 +7,18 @@ class AddParticipant(pathways.RedirectsToPatientMixin, pathways.PagePathway):
     display_name = "Add new participant"
     slug = "new"
     steps = (
-            steps.Step(model=models.StudyParticipantDetails,
-                       template="add_participant_details.html"),
-            models.Demographics,
-            models.CtAndBiopsy,
-            )
+        steps.Step(
+            model=models.StudyParticipantDetails,
+            template="add_participant_details.html"
+        ),
+        models.Demographics,
+        models.CtAndBiopsy,
+    )
 
     def save(self, data, user=None, patient=None, episode=None):
-        patient, episode = super(AddParticipant, self).save(data, user=user, patient=patient, episode=episode)
+        patient, episode = super(AddParticipant, self).save(
+            data, user=user, patient=patient, episode=episode
+        )
         episode.set_tag_names(["needs_interview"], user)
         return patient, episode
 
@@ -111,3 +115,21 @@ class Interview(pathways.RedirectsToPatientMixin, pathways.PagePathway):
 
         episode.set_tag_names([], user)
         return patient, episode
+
+
+class RemovePatientPathway(pathways.PagePathway):
+    icon = "fa fa-sign-out"
+    display_name = "Remove From List"
+    finish_button_text = "Remove"
+    finish_button_icon = "fa fa-sign-out"
+    slug = "remove"
+    steps = (
+        models.RemovalReason,
+    )
+
+    @transaction.atomic
+    def save(self, data, user=None, episode=None, patient=None):
+        episode.set_tag_names([], user)
+        return super(RemovePatientPathway, self).save(
+            data, user=user, episode=episode, patient=patient
+        )

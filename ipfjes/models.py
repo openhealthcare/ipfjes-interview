@@ -50,6 +50,16 @@ class IPFJESEthnicity(lookuplists.LookupList):
         verbose_name_plural = "IPFJES Ethnicities"
 
 
+class ReasonForRemoval(lookuplists.LookupList):
+    class Meta:
+        verbose_name_plural = "Reasons For Removal"
+
+
+class RemovalReason(models.EpisodeSubrecord):
+    _is_singleton = True
+    reason = models.ForeignKeyOrFreeText(ReasonForRemoval)
+
+
 class OccupationalHistory(models.PatientSubrecord):
     _title = "Occupational History"
 
