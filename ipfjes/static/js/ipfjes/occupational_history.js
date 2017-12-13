@@ -57,6 +57,11 @@ angular.module('opal.controllers').controller(
         };
 
         scope.confirm = function(oh){
+            _.each(oh, function(v, k){
+              if(k !== "_client"){
+                oh[k] = undefined;
+              }
+            });
             oh._client.aeh = [];
             oh.soc_job = oh._client.job || oh._client.soc_job_filter;
             if(scope.socCodes[oh.soc_job]){
