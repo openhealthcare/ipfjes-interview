@@ -9,14 +9,13 @@
         </p>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-6 col-md-offset-4">
-        <div ng-show="episode.{{ models.RemovalReason.get_api_name }}[0].reason.length">
-          {% record_panel models.RemovalReason %}
-        </div>
-        {% record_panel models.CtAndBiopsy %}
         {% record_panel models.OccupationalHistory %}
+        {% record_panel models.ResidentialHistory %}
         {% record_panel models.CohabitationHistory %}
+        {% record_panel models.BirthPlace %}
         {% record_panel models.SmokingHistory %}
         {% record_panel models.Dyspnoea %}
         {% record_panel models.BloodRelationHistory %}
@@ -28,5 +27,6 @@
         {% record_panel models.DiagnosisHistory %}
         {% record_panel models.StudyParticipantDetails %}
         {% record_panel models.GeneralNotes %}
+
     </div>
 </div>

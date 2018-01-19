@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('ipfjes', '0033_auto_20170718_1106'),
+        ('ipfjes', '0033_merge'),
     ]
 
     operations = [

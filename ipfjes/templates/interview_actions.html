@@ -1,7 +1,3 @@
-{% load forms %}
 <a class="btn btn-secondary" href="/pathway/#/interview/[[row.demographics[0].patient_id]]/[[row.id]]/">
-    {% icon 'fa-pencil' %} Start interview
-</a>
-<a class="btn btn-primary" pathway-episode="row" open-pathway="remove" pathway-callback="removeFromList(row.id)">
-  {% icon 'fa-sign-out' %} Remove
+    Start interview
 </a>
