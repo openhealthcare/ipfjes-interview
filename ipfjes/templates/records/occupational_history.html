@@ -1,4 +1,4 @@
-<span ng-show="item.soc_job">
+<span ng-show="item._client.job.title">
   <b>
     <span ng-show="item.start_year">
       [[ item.start_year ]]
@@ -6,7 +6,7 @@
         - [[ item.end_year ]]
       </span>
   </b>
-  [[ item.soc_job ]]
+  [[ item._client.job.title ]]
   <br />
   </span>
 </span>

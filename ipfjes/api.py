@@ -1,30 +1,16 @@
 from opal.core import api as opal_api
-from opal.core.views import json_response
 from ipfjes.models import SocCode
+from rest_framework import filters
+from ipfjes.serializers import SocCodeSerializer
+from rest_framework import viewsets
 
 
-RISK_PRONE_CODES = [
-    "541", "534", "532", "570", "896", "311", "520", "521", "893",
-    "533", "301", "506", "913", "211", "571"
-]
+class SocCodeListView(viewsets.ModelViewSet):
+    queryset = SocCode.objects.all().order_by("soc2000").order_by("soc90").order_by("title")
+    serializer_class = SocCodeSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('^title',)
 
-
-class SocCodeRiskViewSet(opal_api.LoginRequiredViewset):
-    """
-    Provides applications with information about all system users
-    """
-    base_name = 'soc_code'
-
-    def list(self, request):
-        """
-        Serialise all opal.models.UserProfile objects
-        """
-        return json_response(list(
-            SocCode.objects.filter(soc90__in=RISK_PRONE_CODES).values(
-                "title",
-            )
-        ))
 
 router = opal_api.OPALRouter()
-
-router.register("soc_code_at_risk", SocCodeRiskViewSet)
+router.register("soc_code_list", SocCodeListView)

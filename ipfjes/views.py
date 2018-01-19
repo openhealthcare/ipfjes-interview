@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 
 from ipfjes.models import SocCode
 
+
 class SocCodeDetailView(TemplateView):
     template_name = 'soc_code_detail.html'
 

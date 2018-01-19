@@ -40,16 +40,14 @@ angular.module('opal.controllers').controller(
             return result;
         };
 
-        scope.select = function(job, client){
-            client.job = job;
+        scope.select = function(job, occupational_history){
+            occupational_history._client.job = job;
         };
 
         scope.filterChanged = function(client){
-            if(client.soc_job_filter && client.soc_job_filter.length > 2){
-                client.matches = _.filter(scope.socjob_list, function(j){
-                    return j.toLowerCase().indexOf(client.soc_job_filter.toLowerCase()) != -1;
-                });
-            }
+            return SocCodeService.search(client.soc_job_filter).then(function(matches){
+              client.matches = matches;
+            })
         };
 
         scope.hasAEH = function(oh){
@@ -63,7 +61,7 @@ angular.module('opal.controllers').controller(
               }
             });
             oh._client.aeh = [];
-            oh.soc_job = oh._client.job || oh._client.soc_job_filter;
+            oh.soc_code_id = oh._client.job.id;
             if(scope.socCodes[oh.soc_job]){
               scope.addAnotherAEH(oh._client.aeh, oh);
             }
@@ -73,7 +71,7 @@ angular.module('opal.controllers').controller(
 
         scope.get_soc_details = function(client){
             if(client.job){
-                return '/soc/details/?title=' + client.job;
+                return '/soc/details/?title=' + client.job.title;
             }
         };
 
@@ -117,12 +115,6 @@ angular.module('opal.controllers').controller(
         scope.socCodes = {};
         scope.aspestos_risk = {};
 
-        SocCodeService.load().then(function(data){
-            _.each(data, function(d){
-                scope.socCodes[d.title] = d;
-            });
-        });
-
         scope.initialise = function(){
             if(!scope.editing.occupational_history.length){
                 var oh = {_client: getClient()};
@@ -135,6 +127,13 @@ angular.module('opal.controllers').controller(
                 // and remove it from the standard list
                 _.each(scope.editing.occupational_history, function(oh){
                     oh._client = getClient(oh);
+
+                    if(oh.soc_code_id){
+                      SocCodeService.load(oh.soc_code_id).then(function(job){
+                        oh._client.job = job;
+                        oh._client.soc_job_filter = job.title;
+                      })
+                    }
 
                     var nestedAeh = [];
 
@@ -168,12 +167,6 @@ angular.module('opal.controllers').controller(
                     }
                 });
             }
-            // load in the code service
-            SocCodeService.load().then(function(data){
-                _.each(data, function(d){
-                    scope.socCodes[d.title] = d;
-                });
-            });
         };
 
         scope.$watch(scope.editing, "occupational_history", function(){

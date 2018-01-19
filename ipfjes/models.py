@@ -64,7 +64,9 @@ class OccupationalHistory(models.PatientSubrecord):
     _title = "Occupational History"
 
     job_name = fields.CharField(max_length=250, blank=True, null=True)
+    # this will no longer be used
     soc_job = models.ForeignKeyOrFreeText(SocJob, verbose_name="Job name")
+    soc_code = django_models.ForeignKey("SocCode", blank=True, null=True)
     job_tasks = fields.TextField(blank=True, null=True)
     company_name = fields.TextField(blank=True, null=True)
     employer_output = fields.CharField(max_length=250, blank=True, null=True) # change label to be what did you make

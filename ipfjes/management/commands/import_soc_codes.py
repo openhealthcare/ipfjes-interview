@@ -25,19 +25,8 @@ class Command(BaseCommand):
                 )
                 print 'Saved', i, soc_code
 
-    def as_lookup_list(self):
-        for s in models.SocCode.objects.all():
-            entry = models.SocJob(name=s.title)
-            try:
-                entry.save()
-            except:
-                pass  # We're ignoring duplicates for now. There are thousands.
-
-
     def handle(self, *a, **k):
         print "Deleting all Soc Codes"
         self.clean()
         print "Loading Soc Code data"
         self.load()
-        print "Creating Soc Code Job lookup list"
-        self.as_lookup_list()

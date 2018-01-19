@@ -18,7 +18,7 @@
     {% input  field="OccupationalHistory.end_year"  %}
   </div>
 </div>
-<div ng-show="editing.occupational_history._client.editJob">
+<div ng-if="editing.occupational_history._client.editJob">
   <div class="row">
     <div class="col-md-4">
       {% script_text "What was the name of your job?" %}
@@ -31,20 +31,28 @@
     <div class="col-md-3">
       <h4>
         Matches
-        <span ng-show="matches.length > 0">
+        <span ng-show="editing.occupational_history._client.matches.length > 0">
           ([[ matches.length ]])
         </span>
       </h4>
       <ul class="well job-matches">
-        <li ng-repeat="job in editing.occupational_history._client.matches" ng-click="select(job, editing.occupational_history._client)" class="pointer">
-          [[ job ]]
+        <li ng-class="{selected: job.id === editing.occupational_history._client.job.id}" ng-repeat="job in editing.occupational_history._client.matches" ng-click="select(job, editing.occupational_history)" class="pointer">
+          [[ job.title ]] ([[ job.soc90 ]] - [[ job.soc2000 ]])
         </li>
       </ul>
     </div>
     <div class="col-md-7">
       <h4>Description</h4>
       <div class="well job-desc">
-        <ng-include src="get_soc_details(editing.occupational_history._client)"></ng-include>
+        [[ editing.occupational_history._client.job.title ]]
+          <br />
+        [[ editing.occupational_history._client.job.short_desc ]]
+          <br />
+        [[ editing.occupational_history._client.job.entry ]]
+          <br />
+        [[ editing.occupational_history._client.job.tasks ]]
+          <br />
+        [[ editing.occupational_history._client.job.related ]]
       </div>
     </div>
     <div class="col-md-1">
@@ -57,7 +65,7 @@
 </div>
 <div ng-show="!editing.occupational_history._client.editJob" class="row">
   <div class="col-md-12">
-    <h3>Job Title: [[ editing.occupational_history.soc_job ]]
+    <h3>Job Title: [[ editing.occupational_history._client.job.title ]]
       <a ng-click="switchToEditJob(editing.occupational_history._client)" class="btn btn-primary pull-right">
         {% icon "fa-edit" %}
         Edit
